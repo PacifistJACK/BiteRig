@@ -1,0 +1,165 @@
+[
+  {
+    "id": "167d5ce6-72b9-49ce-9663-3f47e65fa4e5",
+    "created_at": "2026-07-28T09:13:08.163518+00:00",
+    "filters": [
+      "High Protein"
+    ],
+    "nationality": "American",
+    "recipe": {
+      "recipe_name": "Protein-Packed Classic Smash Burgers",
+      "description": "Sink your teeth into these high-protein American-style smash burgers, featuring juicy beef, melty cheese, and all the classic fixings. Ready in under 30 minutes, they’re the perfect protein boost for lunch or dinner.",
+      "detected_ingredients": [
+        "ground beef",
+        "sesame burger buns",
+        "American cheese slices",
+        "leaf lettuce",
+        "tomato slices",
+        "red onion slices",
+        "pickle slices",
+        "mayonnaise",
+        "salt",
+        "pepper"
+      ],
+      "additional_ingredients": [
+        "olive oil (or neutral cooking oil)",
+        "unsalted butter",
+        "Worcestershire sauce",
+        "Dijon mustard"
+      ],
+      "prep_time": "15 minutes",
+      "cook_time": "10 minutes",
+      "total_time": "25 minutes",
+      "difficulty": "Easy",
+      "servings": "4 people",
+      "tags": [
+        "High Protein",
+        "American",
+        "Quick",
+        "Burger",
+        "Grilling"
+      ],
+      "tips": "Use a heavy, flat spatula to press firmly and evenly for those irresistible crispy edges on your smash burgers.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Season and Portion Beef",
+          "instruction": "In a bowl, gently combine ground beef with 1 tsp salt, 1/2 tsp freshly ground pepper, and 1 tsp Worcestershire sauce. Divide into four equal 4-oz balls, handling the meat lightly to keep it tender."
+        },
+        {
+          "step": 2,
+          "title": "Prep the Cooking Surface",
+          "instruction": "Heat a large cast-iron skillet or griddle over medium-high heat until shimmering. Add a thin film of olive oil to coat the surface—this ensures a perfect sear."
+        },
+        {
+          "step": 3,
+          "title": "Smash and Sear Patties",
+          "instruction": "Place two beef balls on the hot surface, then immediately press each with a heavy spatula or burger press until about ¼ inch thick. Cook without moving for 2–3 minutes, until deeply browned and crisp around the edges."
+        },
+        {
+          "step": 4,
+          "title": "Flip and Add Cheese",
+          "instruction": "Flip the patties, immediately top each with a slice of American cheese, and cover the pan for 1 minute to melt the cheese perfectly."
+        },
+        {
+          "step": 5,
+          "title": "Toast the Buns",
+          "instruction": "Meanwhile, spread softened butter on the cut sides of your buns. Place face-down in a separate skillet over medium heat until golden brown, about 1–2 minutes."
+        },
+        {
+          "step": 6,
+          "title": "Assemble the Burgers",
+          "instruction": "Spread a thin layer of mayonnaise and Dijon mustard on the buns. Layer lettuce, tomato slices, the cheesy smash patty, red onion rings, and pickle slices. Top with the bun lid and serve immediately."
+        }
+      ],
+      "id": "167d5ce6-72b9-49ce-9663-3f47e65fa4e5",
+      "created_at": "2026-07-28T09:13:08.163518+00:00",
+      "image_url": null
+    }
+  },
+  {
+    "id": "6f9a9fae-3c5c-41a7-8e19-888827a48c44",
+    "created_at": "2026-07-28T09:04:19.175782+00:00",
+    "filters": [
+      "Snack"
+    ],
+    "nationality": "Indian",
+    "recipe": {
+      "recipe_name": "Bombay Masala Slider Bites",
+      "description": "These mini sliders pack the bold, aromatic flavors of India into a fun snack. Succulent spiced beef patties are crowned with tangy chutney, crisp lettuce and cheddar, delivering delicious fusion in every bite.",
+      "detected_ingredients": [
+        "ground beef",
+        "burger buns",
+        "processed cheese slices",
+        "lettuce",
+        "tomato",
+        "pickles",
+        "red onion",
+        "mayonnaise",
+        "salt",
+        "pepper"
+      ],
+      "additional_ingredients": [
+        "garam masala",
+        "ground cumin",
+        "ground coriander",
+        "chili powder",
+        "ginger-garlic paste",
+        "fresh cilantro",
+        "tamarind chutney or paste",
+        "vegetable oil"
+      ],
+      "prep_time": "10 minutes",
+      "cook_time": "12 minutes",
+      "total_time": "22 minutes",
+      "difficulty": "Easy",
+      "servings": "4 people",
+      "tags": [
+        "Snack",
+        "Indian-Fusion",
+        "Quick",
+        "Spicy"
+      ],
+      "tips": "Toast your buns face down on the hot pan for 1–2 minutes to create a crisp barrier that keeps the sliders from getting soggy.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Mix the Masala Beef",
+          "instruction": "In a medium bowl combine ground beef with 1 tsp garam masala, ½ tsp ground cumin, ½ tsp ground coriander, ¼ tsp chili powder, 1 tsp ginger-garlic paste, a pinch of salt and pepper. Use your hands to gently mix until just combined—overworking will toughen the meat."
+        },
+        {
+          "step": 2,
+          "title": "Form Mini Patties",
+          "instruction": "Divide the spiced mixture into 4 equal portions. Pat each into a 2½-inch diameter patty about ½-inch thick. Press a slight dimple in the center of each patty to ensure even cooking."
+        },
+        {
+          "step": 3,
+          "title": "Sear the Patties",
+          "instruction": "Heat 1 tbsp vegetable oil in a nonstick pan over medium-high heat. When shimmering, add the patties and cook 3–4 minutes per side until a golden crust forms and internal temperature reaches 160°F (71°C). Transfer to a plate and let rest."
+        },
+        {
+          "step": 4,
+          "title": "Prep the Toppings",
+          "instruction": "Thinly slice the tomato and red onion. Tear lettuce leaves into slider-friendly pieces. Warm the buns in the same pan for 1 minute, cut-side down, until lightly toasted."
+        },
+        {
+          "step": 5,
+          "title": "Assemble with Chutney",
+          "instruction": "Spread 1 tsp mayonnaise and 1 tsp tamarind chutney on the bottom half of each bun. Layer lettuce, tomato, a spiced beef patty and a slice of cheese."
+        },
+        {
+          "step": 6,
+          "title": "Add Crunch and Finish",
+          "instruction": "Top each cheese slice with red onion rings and pickle slices. Scatter a few chopped cilantro leaves for freshness and dust with chaat masala if you like extra tang."
+        },
+        {
+          "step": 7,
+          "title": "Serve Warm",
+          "instruction": "Cap with the top bun and secure with a small skewer or toothpick. Serve immediately alongside a mint-yogurt dip or extra chutney for dunking."
+        }
+      ],
+      "id": "6f9a9fae-3c5c-41a7-8e19-888827a48c44",
+      "created_at": "2026-07-28T09:04:19.175782+00:00"
+    }
+  }
+]

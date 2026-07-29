@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BiteRig - Recipe Result</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                            "surface-bright": "#fcf9f3",
+                            "surface-container-lowest": "#ffffff",
+                            "on-error": "#ffffff",
+                            "secondary-container": "#b4f41e",
+                            "surface-dim": "#dcdad4",
+                            "surface-container": "#f0eee8",
+                            "on-tertiary": "#ffffff",
+                            "inverse-surface": "#31312d",
+                            "background": "#fcf9f3",
+                            "on-secondary-container": "#4d6c00",
+                            "on-error-container": "#93000a",
+                            "on-surface-variant": "#544434",
+                            "surface-variant": "#e5e2dc",
+                            "on-tertiary-fixed-variant": "#643566",
+                            "inverse-on-surface": "#f3f0ea",
+                            "tertiary-fixed": "#ffd6fa",
+                            "surface-container-low": "#f6f3ed",
+                            "secondary-fixed": "#b6f623",
+                            "surface": "#fcf9f3",
+                            "error-container": "#ffdad6",
+                            "primary-fixed": "#ffdcbc",
+                            "outline-variant": "#dac2ae",
+                            "primary-container": "#ff9f1c",
+                            "primary": "#895100",
+                            "surface-container-high": "#ebe8e2",
+                            "on-secondary-fixed": "#141f00",
+                            "on-primary-fixed-variant": "#683d00",
+                            "on-background": "#1c1c18",
+                            "on-secondary": "#ffffff",
+                            "error": "#ba1a1a",
+                            "tertiary-fixed-dim": "#efb3ed",
+                            "secondary": "#496800",
+                            "inverse-primary": "#ffb86b",
+                            "secondary-fixed-dim": "#9dd900",
+                            "surface-container-highest": "#e5e2dc",
+                            "outline": "#877462",
+                            "on-tertiary-fixed": "#330638",
+                            "tertiary-container": "#dda2db",
+                            "on-primary-fixed": "#2c1700",
+                            "tertiary": "#7f4c7f",
+                            "on-tertiary-container": "#643566",
+                            "primary-fixed-dim": "#ffb86b",
+                            "on-primary": "#ffffff",
+                            "on-primary-container": "#683c00",
+                            "on-surface": "#1c1c18",
+                            "on-secondary-fixed-variant": "#364e00",
+                            "surface-tint": "#895100"
+                    },
+                    "borderRadius": {
+                            "DEFAULT": "1rem",
+                            "lg": "2rem",
+                            "xl": "3rem",
+                            "full": "9999px"
+                    },
+                    "spacing": {
+                            "base": "4px",
+                            "margin-desktop": "120px",
+                            "sm": "16px",
+                            "md": "24px",
+                            "lg": "40px",
+                            "margin-mobile": "20px",
+                            "xs": "8px",
+                            "xl": "64px",
+                            "gutter": "20px"
+                    },
+                    "fontFamily": {
+                            "display-lg": ["Plus Jakarta Sans"],
+                            "label-sm": ["Work Sans"],
+                            "label-lg": ["Work Sans"],
+                            "body-md": ["Work Sans"],
+                            "headline-lg": ["Plus Jakarta Sans"],
+                            "headline-md": ["Plus Jakarta Sans"],
+                            "body-lg": ["Work Sans"],
+                            "headline-lg-mobile": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                            "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                            "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                            "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                            "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                            "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                            "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                            "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                            "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface-bright text-on-surface font-body-md pb-32">
+<!-- TopAppBar -->
+<header class="bg-surface-bright text-primary flex justify-between items-center w-full px-margin-mobile py-sm md:px-margin-desktop docked full-width top-0 sticky z-40">
+<div class="flex items-center gap-2 hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-headline-md">restaurant_menu</span>
+</div>
+<h1 class="font-display-lg text-headline-md tracking-tighter hover:opacity-80 transition-opacity">BiteRig</h1>
+<div class="flex items-center gap-2 hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-headline-md">account_circle</span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="w-full max-w-[1280px] mx-auto px-margin-mobile md:px-margin-desktop mt-sm">
+<!-- Hero Recipe Card (Level 1 Elevation) -->
+<article class="bg-surface-container-lowest rounded-xl shadow-[0_4px_20px_0px_rgba(127,76,127,0.15)] overflow-hidden mb-xl">
+<!-- Hero Image -->
+<div class="w-full h-[300px] md:h-[400px] relative overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center w-full h-full" data-alt="A mouth-watering close-up of a gourmet cheesy fusion flatbread, bursting with vibrant culinary colors. The crust is perfectly blistered, topped with bubbling golden cheeses, fresh vibrant green herbs, and scattered exotic spices. Set in a brightly lit, high-energy professional kitchen setting with soft, warm light-mode illumination. The composition is immersive, dynamic, and incredibly appetizing, showcasing chef-core funky refinement with deep textures." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDutNxQuNAPQb6UNPXomxYYFfiDrcu640nRrrvjrOU6abvUL_bOK5q0F9-AmqKAEAiHO5kQurWFIq_eV36K2Wme6SZTBrA3E_-J6UPH_jiuaJdF9GUbWoihBWF2GTCxBWYaMsTzLKkBjFURPUqyD_rR6ZLZWb-C2JhxtS43bzQyQLsKpasbexnlqfuvOVF2I7QqXURFH-WyfwBQT__x_AKwkp89hOjD_uoXhOAS9f3zLDmdMSdBAcz-sQ')"></div>
+</div>
+<!-- Info Section -->
+<div class="p-md md:p-lg flex flex-col gap-sm">
+<!-- Tags -->
+<div class="flex flex-wrap gap-xs">
+<span class="bg-secondary-container text-on-secondary-container font-label-sm text-label-sm px-3 py-1 rounded-full uppercase tracking-widest">Vegetarian</span>
+<span class="bg-secondary-container text-on-secondary-container font-label-sm text-label-sm px-3 py-1 rounded-full uppercase tracking-widest">Fusion</span>
+</div>
+<!-- Title -->
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface">Gourmet Cheesy Fusion Flatbread</h2>
+<!-- Meta Info -->
+<div class="flex items-center gap-md pt-2 border-t border-outline-variant/30">
+<div class="flex items-center gap-2 text-on-surface-variant font-label-lg text-label-lg">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">timer</span>
+<span>25 mins</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-label-lg text-label-lg">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span>Medium</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Recipe Steps Section (Focus Mode) -->
+<section class="mb-xl">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-md px-2">The Process</h3>
+<div class="flex flex-col">
+<!-- Step 1 -->
+<div class="flex items-start gap-md py-md border-b-2 border-outline-variant/20 px-2 group hover:bg-surface-container-low transition-colors rounded-lg">
+<div class="font-display-lg text-display-lg text-primary flex-shrink-0 leading-none">1</div>
+<div class="flex flex-col gap-2 pt-1">
+<p class="font-body-lg text-body-lg text-on-surface">Preheat your oven to the highest setting, ideally 500°F (260°C). Place a pizza stone inside to get it scorching hot. This is crucial for that perfect blistered crust.</p>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="flex items-start gap-md py-md border-b-2 border-outline-variant/20 px-2 group hover:bg-surface-container-low transition-colors rounded-lg">
+<div class="font-display-lg text-display-lg text-primary flex-shrink-0 leading-none">2</div>
+<div class="flex flex-col gap-2 pt-1">
+<p class="font-body-lg text-body-lg text-on-surface">Stretch your dough on a generously floured surface. You want an artisanal, slightly irregular shape. Don't overwork it—keep those air pockets intact.</p>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="flex items-start gap-md py-md border-b-2 border-outline-variant/20 px-2 group hover:bg-surface-container-low transition-colors rounded-lg">
+<div class="font-display-lg text-display-lg text-primary flex-shrink-0 leading-none">3</div>
+<div class="flex flex-col gap-2 pt-1">
+<p class="font-body-lg text-body-lg text-on-surface">Layer the base heavily with the garlic confit paste, followed by a mountain of our proprietary three-cheese blend. Scatter the exotic spice mix evenly across the top.</p>
+</div>
+</div>
+<!-- Step 4 -->
+<div class="flex items-start gap-md py-md px-2 group hover:bg-surface-container-low transition-colors rounded-lg">
+<div class="font-display-lg text-display-lg text-primary flex-shrink-0 leading-none">4</div>
+<div class="flex flex-col gap-2 pt-1">
+<p class="font-body-lg text-body-lg text-on-surface">Slide onto the hot stone and bake for 8-10 minutes until bubbling and charred at the edges. Finish with a heavy handful of fresh green herbs immediately out of the oven.</p>
+<button class="mt-4 self-start bg-primary text-on-primary font-label-lg text-label-lg px-6 py-3 rounded-full hover:opacity-90 transition-opacity shadow-md">Complete Recipe</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden shadow-[0_-4px_20px_0px_rgba(127,76,127,0.15)] bg-surface-container-lowest fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-sm pb-6 pt-2 rounded-t-lg">
+<!-- Inactive: Home -->
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-high transition-colors rounded-full cursor-pointer">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</div>
+<!-- Inactive: Camera -->
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-high transition-colors rounded-full cursor-pointer">
+<span class="material-symbols-outlined mb-1">photo_camera</span>
+<span class="font-label-sm text-label-sm">Camera</span>
+</div>
+<!-- Active: Recipes -->
+<div class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 scale-90 duration-200 cursor-pointer">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+<span class="font-label-sm text-label-sm font-bold">Recipes</span>
+</div>
+<!-- Inactive: Profile -->
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-high transition-colors rounded-full cursor-pointer">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</div>
+</nav>
+</body></html>

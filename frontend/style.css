@@ -1,0 +1,180 @@
+/* ==========================================================================
+   BiteRig — Custom CSS
+   Tailwind handles utilities; this file handles animations, view transitions,
+   camera modal styles, toast notifications, and other bespoke effects.
+   ========================================================================== */
+
+/* ---- View system ---- */
+.view {
+  display: none;
+  animation: fadeSlideIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.view.active {
+  display: block;
+}
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- Loading view (fullscreen, overrides block display) ---- */
+#view-loading {
+  display: none;
+}
+#view-loading.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---- Noise texture overlay ---- */
+.bg-noise {
+  position: relative;
+}
+.bg-noise::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ---- Custom shadow ---- */
+.shadow-chef {
+  box-shadow: 0 12px 40px rgba(100, 53, 102, 0.15);
+}
+.shadow-chef-hover {
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+.shadow-chef-hover:hover {
+  box-shadow: 0 16px 50px rgba(100, 53, 102, 0.25);
+  transform: translateY(-2px);
+}
+
+/* ---- Hide scrollbar ---- */
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ---- Filter chip toggle ---- */
+.filter-chip {
+  transition: background-color 0.2s ease, color 0.2s ease,
+              border-color 0.2s ease, transform 0.15s ease;
+}
+.filter-chip:active { transform: scale(0.95); }
+
+/* ---- Nationality circle ---- */
+.nationality-circle {
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+              background-color 0.2s ease, border-color 0.2s ease;
+}
+.nationality-circle:active { transform: scale(0.92) !important; }
+
+/* ---- Image preview overlay ---- */
+.viewfinder-overlay {
+  transition: opacity 0.3s ease;
+}
+.viewfinder-overlay.has-image {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ---- Loading screen ---- */
+.loading-pulse {
+  animation: loading-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+@keyframes loading-pulse {
+  0%, 100% { opacity: 1; transform: scale(1);    }
+  50%       { opacity: 0.85; transform: scale(1.05); }
+}
+
+.bg-dot-pattern {
+  background-color: #fcf9f3;
+  background-image: radial-gradient(#dac2ae 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Progress bar shimmer */
+.progress-shimmer {
+  background: linear-gradient(90deg, #ff9f1c 0%, #ffb86b 50%, #ff9f1c 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.8s linear infinite;
+}
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Orbiting dots around skillet */
+.orbit-ring {
+  animation: orbit-spin 3s linear infinite;
+  transform-origin: center;
+}
+.orbit-ring-2 {
+  animation: orbit-spin 5s linear infinite reverse;
+  transform-origin: center;
+}
+@keyframes orbit-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ---- Toast notification ---- */
+#toast {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+#toast.show {
+  opacity: 1 !important;
+  transform: translateX(-50%) translateY(0) !important;
+  pointer-events: auto;
+}
+
+/* ---- Camera modal ---- */
+#camera-modal {
+  animation: fadeIn 0.2s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+#camera-feed {
+  transform: scaleX(-1); /* mirror front camera; flip back camera in JS */
+  border-radius: 1rem;
+}
+
+/* ---- Recipe step cards ---- */
+.step-card {
+  transition: background-color 0.2s ease;
+}
+.step-card:hover {
+  background-color: #f6f3ed; /* surface-container-low */
+}
+
+/* ---- Cook Again button pulse ---- */
+@keyframes cook-again-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(137, 81, 0, 0.4); }
+  50%       { box-shadow: 0 0 0 10px rgba(137, 81, 0, 0); }
+}
+#btn-cook-again {
+  animation: cook-again-pulse 2.5s ease-in-out infinite;
+}
+
+/* ---- COOK button ---- */
+#btn-cook {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+#btn-cook:active {
+  transform: scale(0.95);
+}
+#btn-cook.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

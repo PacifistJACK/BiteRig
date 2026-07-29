@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="BiteRig — Snap your ingredients, get an instant AI-generated recipe. Upload or capture a photo and let the AI chef cook."/>
+  <title>BiteRig — Let Him Cook</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-bright": "#fcf9f3",
+            "surface-container-lowest": "#ffffff",
+            "on-error": "#ffffff",
+            "secondary-container": "#b4f41e",
+            "surface-dim": "#dcdad4",
+            "surface-container": "#f0eee8",
+            "on-tertiary": "#ffffff",
+            "inverse-surface": "#31312d",
+            "background": "#fcf9f3",
+            "on-secondary-container": "#4d6c00",
+            "on-error-container": "#93000a",
+            "on-surface-variant": "#544434",
+            "surface-variant": "#e5e2dc",
+            "on-tertiary-fixed-variant": "#643566",
+            "inverse-on-surface": "#f3f0ea",
+            "tertiary-fixed": "#ffd6fa",
+            "surface-container-low": "#f6f3ed",
+            "secondary-fixed": "#b6f623",
+            "surface": "#fcf9f3",
+            "error-container": "#ffdad6",
+            "primary-fixed": "#ffdcbc",
+            "outline-variant": "#dac2ae",
+            "primary-container": "#ff9f1c",
+            "primary": "#895100",
+            "surface-container-high": "#ebe8e2",
+            "on-secondary-fixed": "#141f00",
+            "on-primary-fixed-variant": "#683d00",
+            "on-background": "#1c1c18",
+            "on-secondary": "#ffffff",
+            "error": "#ba1a1a",
+            "tertiary-fixed-dim": "#efb3ed",
+            "secondary": "#496800",
+            "inverse-primary": "#ffb86b",
+            "secondary-fixed-dim": "#9dd900",
+            "surface-container-highest": "#e5e2dc",
+            "outline": "#877462",
+            "on-tertiary-fixed": "#330638",
+            "tertiary-container": "#dda2db",
+            "on-primary-fixed": "#2c1700",
+            "tertiary": "#7f4c7f",
+            "on-tertiary-container": "#643566",
+            "primary-fixed-dim": "#ffb86b",
+            "on-primary": "#ffffff",
+            "on-primary-container": "#683c00",
+            "on-surface": "#1c1c18",
+            "on-secondary-fixed-variant": "#364e00",
+            "surface-tint": "#895100"
+          },
+          borderRadius: {
+            DEFAULT: "1rem",
+            lg: "2rem",
+            xl: "3rem",
+            full: "9999px"
+          },
+          spacing: {
+            base: "4px",
+            "margin-desktop": "120px",
+            sm: "16px",
+            md: "24px",
+            lg: "40px",
+            "margin-mobile": "20px",
+            xs: "8px",
+            xl: "64px",
+            gutter: "20px"
+          },
+          fontFamily: {
+            "display-lg":         ["Plus Jakarta Sans"],
+            "label-sm":           ["Work Sans"],
+            "label-lg":           ["Work Sans"],
+            "body-md":            ["Work Sans"],
+            "headline-lg":        ["Plus Jakarta Sans"],
+            "headline-md":        ["Plus Jakarta Sans"],
+            "body-lg":            ["Work Sans"],
+            "headline-lg-mobile": ["Plus Jakarta Sans"]
+          },
+          fontSize: {
+            "display-lg":         ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "800" }],
+            "label-sm":           ["12px", { lineHeight: "16px", fontWeight: "500" }],
+            "label-lg":           ["14px", { lineHeight: "20px", letterSpacing: "0.02em", fontWeight: "600" }],
+            "body-md":            ["16px", { lineHeight: "24px", fontWeight: "400" }],
+            "headline-lg":        ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "700" }],
+            "headline-md":        ["24px", { lineHeight: "32px", fontWeight: "700" }],
+            "body-lg":            ["18px", { lineHeight: "28px", fontWeight: "400" }],
+            "headline-lg-mobile": ["28px", { lineHeight: "36px", fontWeight: "700" }]
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css"/>
+</head>
+
+<body class="bg-surface-bright text-on-surface font-body-md antialiased">
+
+<!-- ======================================================================
+     TOAST NOTIFICATION
+     ====================================================================== -->
+<div id="toast"
+     role="alert"
+     class="fixed top-5 left-1/2 z-[300] -translate-x-1/2 translate-y-[-8px]
+            bg-inverse-surface text-inverse-on-surface
+            px-6 py-3 rounded-full font-label-lg text-label-lg
+            shadow-xl opacity-0 flex items-center gap-2">
+  <span class="material-symbols-outlined text-[18px]" id="toast-icon">error</span>
+  <span id="toast-msg">Something went wrong</span>
+</div>
+
+<!-- ======================================================================
+     VIEW: HOME
+     ====================================================================== -->
+<div id="view-home" class="view active min-h-screen bg-noise pb-32">
+
+  <!-- Top App Bar -->
+  <header class="sticky top-0 z-40 bg-surface-bright/95 backdrop-blur-sm">
+    <div class="flex justify-between items-center w-full px-margin-mobile py-sm md:px-margin-desktop">
+      <button aria-label="Menu" class="text-on-surface-variant hover:opacity-80 transition-opacity p-2 rounded-full hover:bg-surface-container">
+        <span class="material-symbols-outlined" style="font-variation-settings:'wght' 600,'FILL' 0;">restaurant_menu</span>
+      </button>
+      <h1 class="font-display-lg text-headline-md text-primary tracking-tighter">BiteRig</h1>
+      <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container shadow-chef bg-surface-variant cursor-pointer hover:opacity-80 transition-opacity">
+        <div class="w-full h-full bg-gradient-to-br from-primary-container to-primary flex items-center justify-center">
+          <span class="material-symbols-outlined text-on-primary text-[20px]" style="font-variation-settings:'FILL' 1;">person</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="max-w-md mx-auto px-margin-mobile flex flex-col gap-lg mt-sm relative z-10">
+
+    <!-- ── Viewfinder / Image Upload Area ── -->
+    <section class="flex flex-col gap-sm">
+      <div id="viewfinder"
+           class="w-full aspect-[4/5] bg-surface-container-lowest rounded-xl shadow-chef overflow-hidden relative group cursor-pointer border-2 border-dashed border-outline-variant"
+           onclick="document.getElementById('file-upload').click()">
+
+        <!-- Placeholder state -->
+        <div id="viewfinder-placeholder" class="absolute inset-0 flex flex-col items-center justify-center gap-4 p-6 text-center transition-all duration-300">
+          <div class="w-20 h-20 rounded-full bg-surface-container flex items-center justify-center">
+            <span class="material-symbols-outlined text-[40px] text-on-surface-variant" style="font-variation-settings:'FILL' 1;">add_photo_alternate</span>
+          </div>
+          <div>
+            <p class="font-headline-md text-headline-md text-on-surface">Snap your ingredients</p>
+            <p class="font-body-md text-body-md text-on-surface-variant mt-1">Upload a photo or use your camera</p>
+          </div>
+          <div class="flex gap-3 mt-2">
+            <button id="btn-open-upload"
+                    onclick="event.stopPropagation(); document.getElementById('file-upload').click()"
+                    class="flex items-center gap-2 bg-surface-container-high text-on-surface font-label-lg text-label-lg px-4 py-2 rounded-full hover:bg-surface-container-highest transition-colors">
+              <span class="material-symbols-outlined text-[18px]">upload</span> Upload
+            </button>
+            <button id="btn-open-camera"
+                    onclick="event.stopPropagation(); openCamera()"
+                    class="flex items-center gap-2 bg-primary-container text-on-primary-container font-label-lg text-label-lg px-4 py-2 rounded-full hover:opacity-90 transition-opacity shadow-chef">
+              <span class="material-symbols-outlined text-[18px]" style="font-variation-settings:'FILL' 1;">photo_camera</span> Camera
+            </button>
+          </div>
+        </div>
+
+        <!-- Preview state (hidden until image selected) -->
+        <div id="viewfinder-preview" class="hidden absolute inset-0">
+          <img id="preview-img" src="" alt="Selected ingredient photo" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"/>
+          <!-- Overlay on hover: change photo -->
+          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-3">
+            <div class="bg-white/20 backdrop-blur-sm rounded-full p-3">
+              <span class="material-symbols-outlined text-white text-[32px]" style="font-variation-settings:'FILL' 1;">photo_camera</span>
+            </div>
+            <span class="text-white font-label-lg text-label-lg">Change Photo</span>
+          </div>
+          <!-- Action buttons overlay (bottom) -->
+          <div class="absolute bottom-4 left-4 right-4 flex gap-2 justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <button onclick="event.stopPropagation(); document.getElementById('file-upload').click()"
+                    class="flex items-center gap-1 bg-white/25 backdrop-blur-sm text-white border border-white/30 font-label-lg text-label-lg px-4 py-2 rounded-full">
+              <span class="material-symbols-outlined text-[16px]">upload</span> Upload
+            </button>
+            <button onclick="event.stopPropagation(); openCamera()"
+                    class="flex items-center gap-1 bg-primary/80 backdrop-blur-sm text-on-primary font-label-lg text-label-lg px-4 py-2 rounded-full">
+              <span class="material-symbols-outlined text-[16px]" style="font-variation-settings:'FILL' 1;">photo_camera</span> Camera
+            </button>
+          </div>
+          <!-- Corner viewfinder lines -->
+          <div class="absolute inset-0 border-[3px] border-white/30 rounded-xl m-4 pointer-events-none"></div>
+        </div>
+      </div>
+
+      <p class="text-center font-label-lg text-label-lg text-on-surface-variant">
+        Snap or upload your ingredients prep board
+      </p>
+    </section>
+
+    <!-- ── Vibe Check Filters ── -->
+    <section class="flex flex-col gap-xs">
+      <h2 class="font-headline-md text-headline-md text-on-surface">Vibe Check</h2>
+      <div class="flex gap-sm overflow-x-auto hide-scrollbar pb-2 pt-1 -mx-margin-mobile px-margin-mobile">
+
+        <button class="filter-chip whitespace-nowrap bg-surface-container-high border-2 border-outline-variant text-on-surface-variant font-label-lg text-label-lg px-5 py-2 rounded-full flex items-center gap-2"
+                data-filter="Vegan" onclick="toggleFilter(this)">
+          <span class="material-symbols-outlined text-[17px]">eco</span> Vegan
+        </button>
+
+        <button class="filter-chip whitespace-nowrap bg-surface-container-high border-2 border-outline-variant text-on-surface-variant font-label-lg text-label-lg px-5 py-2 rounded-full flex items-center gap-2"
+                data-filter="Vegetarian" onclick="toggleFilter(this)">
+          <span class="material-symbols-outlined text-[17px]">psychiatry</span> Vegetarian
+        </button>
+
+        <button class="filter-chip whitespace-nowrap bg-surface-container-high border-2 border-outline-variant text-on-surface-variant font-label-lg text-label-lg px-5 py-2 rounded-full flex items-center gap-2"
+                data-filter="Snack" onclick="toggleFilter(this)">
+          <span class="material-symbols-outlined text-[17px]">tapas</span> Snack
+        </button>
+
+        <button class="filter-chip whitespace-nowrap bg-surface-container-high border-2 border-outline-variant text-on-surface-variant font-label-lg text-label-lg px-5 py-2 rounded-full flex items-center gap-2"
+                data-filter="Under 20 Minutes" onclick="toggleFilter(this)">
+          <span class="material-symbols-outlined text-[17px]">timer</span> Under 20m
+        </button>
+
+        <button class="filter-chip whitespace-nowrap bg-surface-container-high border-2 border-outline-variant text-on-surface-variant font-label-lg text-label-lg px-5 py-2 rounded-full flex items-center gap-2"
+                data-filter="High Protein" onclick="toggleFilter(this)">
+          <span class="material-symbols-outlined text-[17px]">fitness_center</span> High Protein
+        </button>
+
+        <button class="filter-chip whitespace-nowrap bg-surface-container-high border-2 border-outline-variant text-on-surface-variant font-label-lg text-label-lg px-5 py-2 rounded-full flex items-center gap-2"
+                data-filter="Low Carb" onclick="toggleFilter(this)">
+          <span class="material-symbols-outlined text-[17px]">monitor_weight</span> Low Carb
+        </button>
+
+        <button class="filter-chip whitespace-nowrap bg-surface-container-high border-2 border-outline-variant text-on-surface-variant font-label-lg text-label-lg px-5 py-2 rounded-full flex items-center gap-2"
+                data-filter="Keto" onclick="toggleFilter(this)">
+          <span class="material-symbols-outlined text-[17px]">local_fire_department</span> Keto
+        </button>
+
+        <button class="filter-chip whitespace-nowrap bg-surface-container-high border-2 border-outline-variant text-on-surface-variant font-label-lg text-label-lg px-5 py-2 rounded-full flex items-center gap-2"
+                data-filter="Gluten Free" onclick="toggleFilter(this)">
+          <span class="material-symbols-outlined text-[17px]">spa</span> Gluten Free
+        </button>
+
+      </div>
+    </section>
+
+    <!-- ── Flavor Profile / Nationality ── -->
+    <section class="flex flex-col gap-xs">
+      <div class="flex items-center justify-between">
+        <h2 class="font-headline-md text-headline-md text-on-surface">Flavor Profile</h2>
+        <span class="font-label-sm text-label-sm text-on-surface-variant italic">Optional</span>
+      </div>
+      <div class="flex gap-md overflow-x-auto hide-scrollbar pb-4 pt-2 -mx-margin-mobile px-margin-mobile">
+
+        <div class="nationality-circle flex flex-col items-center gap-2 min-w-[80px] cursor-pointer"
+             data-nationality="Italian" onclick="toggleNationality(this)">
+          <div class="nat-circle w-16 h-16 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center border-4 border-transparent">
+            <span class="material-symbols-outlined text-headline-md">local_pizza</span>
+          </div>
+          <span class="nat-label font-label-lg text-label-lg text-on-surface-variant">Italian</span>
+        </div>
+
+        <div class="nationality-circle flex flex-col items-center gap-2 min-w-[80px] cursor-pointer"
+             data-nationality="Indian" onclick="toggleNationality(this)">
+          <div class="nat-circle w-16 h-16 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center border-4 border-transparent">
+            <span class="material-symbols-outlined text-headline-md">kebab_dining</span>
+          </div>
+          <span class="nat-label font-label-lg text-label-lg text-on-surface-variant">Indian</span>
+        </div>
+
+        <div class="nationality-circle flex flex-col items-center gap-2 min-w-[80px] cursor-pointer"
+             data-nationality="Chinese" onclick="toggleNationality(this)">
+          <div class="nat-circle w-16 h-16 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center border-4 border-transparent">
+            <span class="material-symbols-outlined text-headline-md">ramen_dining</span>
+          </div>
+          <span class="nat-label font-label-lg text-label-lg text-on-surface-variant">Chinese</span>
+        </div>
+
+        <div class="nationality-circle flex flex-col items-center gap-2 min-w-[80px] cursor-pointer"
+             data-nationality="Mexican" onclick="toggleNationality(this)">
+          <div class="nat-circle w-16 h-16 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center border-4 border-transparent">
+            <span class="material-symbols-outlined text-headline-md">tapas</span>
+          </div>
+          <span class="nat-label font-label-lg text-label-lg text-on-surface-variant">Mexican</span>
+        </div>
+
+        <div class="nationality-circle flex flex-col items-center gap-2 min-w-[80px] cursor-pointer"
+             data-nationality="French" onclick="toggleNationality(this)">
+          <div class="nat-circle w-16 h-16 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center border-4 border-transparent">
+            <span class="material-symbols-outlined text-headline-md">bakery_dining</span>
+          </div>
+          <span class="nat-label font-label-lg text-label-lg text-on-surface-variant">French</span>
+        </div>
+
+        <div class="nationality-circle flex flex-col items-center gap-2 min-w-[80px] cursor-pointer"
+             data-nationality="Japanese" onclick="toggleNationality(this)">
+          <div class="nat-circle w-16 h-16 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center border-4 border-transparent">
+            <span class="material-symbols-outlined text-headline-md">rice_bowl</span>
+          </div>
+          <span class="nat-label font-label-lg text-label-lg text-on-surface-variant">Japanese</span>
+        </div>
+
+        <div class="nationality-circle flex flex-col items-center gap-2 min-w-[80px] cursor-pointer"
+             data-nationality="American" onclick="toggleNationality(this)">
+          <div class="nat-circle w-16 h-16 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center border-4 border-transparent">
+            <span class="material-symbols-outlined text-headline-md">lunch_dining</span>
+          </div>
+          <span class="nat-label font-label-lg text-label-lg text-on-surface-variant">American</span>
+        </div>
+
+        <div class="nationality-circle flex flex-col items-center gap-2 min-w-[80px] cursor-pointer"
+             data-nationality="Thai" onclick="toggleNationality(this)">
+          <div class="nat-circle w-16 h-16 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center border-4 border-transparent">
+            <span class="material-symbols-outlined text-headline-md">soup_kitchen</span>
+          </div>
+          <span class="nat-label font-label-lg text-label-lg text-on-surface-variant">Thai</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── COOK Button ── -->
+    <section class="mt-2 pb-sm">
+      <button id="btn-cook"
+              onclick="startCook()"
+              class="w-full bg-primary text-on-primary rounded-full py-5 font-headline-md text-headline-md shadow-chef shadow-chef-hover active:scale-95 transition-all flex items-center justify-center gap-3">
+        <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">local_fire_department</span>
+        COOK
+      </button>
+    </section>
+
+  </main>
+
+  <!-- Bottom Nav -->
+  <nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-sm pb-6 pt-2
+              bg-surface-container-lowest rounded-t-lg shadow-[0_-4px_20px_0px_rgba(127,76,127,0.15)] md:hidden">
+    <button onclick="showView('home')"
+            class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-high transition-colors rounded-full">
+      <span class="material-symbols-outlined mb-1">home</span>
+      <span class="font-label-sm text-label-sm">Home</span>
+    </button>
+    <button onclick="document.getElementById('file-upload').click()"
+            class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 scale-90 duration-200">
+      <span class="material-symbols-outlined mb-1" style="font-variation-settings:'FILL' 1;">photo_camera</span>
+      <span class="font-label-sm text-label-sm font-bold">Camera</span>
+    </button>
+    <button onclick="showView('recipes'); loadRecipesView()"
+            class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-high transition-colors rounded-full">
+      <span class="material-symbols-outlined mb-1">receipt_long</span>
+      <span class="font-label-sm text-label-sm">Recipes</span>
+    </button>
+    <button class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-high transition-colors rounded-full">
+      <span class="material-symbols-outlined mb-1">person</span>
+      <span class="font-label-sm text-label-sm">Profile</span>
+    </button>
+  </nav>
+</div>
+<!-- /view-home -->
+
+
+<!-- ======================================================================
+     VIEW: LOADING
+     ====================================================================== -->
+<div id="view-loading" class="view h-screen w-screen overflow-hidden bg-dot-pattern relative">
+
+  <!-- Ambient gradient blob -->
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+              w-[130vw] h-[130vw] md:w-[70vw] md:h-[70vw]
+              bg-primary-container/20 rounded-full blur-[100px] -z-10 opacity-60"
+       style="animation: orbit-spin 12s linear infinite;"></div>
+
+  <main class="h-full flex flex-col items-center justify-center z-10 p-margin-mobile text-center gap-lg">
+
+    <!-- Animated skillet icon with orbit rings -->
+    <div class="relative w-40 h-40 md:w-56 md:h-56 flex items-center justify-center">
+      <!-- Outer orbit ring -->
+      <div class="orbit-ring absolute inset-0 border-4 border-dashed border-primary-container/40 rounded-full"></div>
+      <!-- Inner orbit ring -->
+      <div class="orbit-ring-2 absolute inset-[16px] border-2 border-dashed border-secondary-container/60 rounded-full"></div>
+      <!-- Icon circle -->
+      <div class="loading-pulse absolute inset-[32px] bg-primary-container rounded-full
+                  shadow-[0_12px_40px_rgba(127,76,127,0.25)] flex items-center justify-center overflow-hidden">
+        <span class="material-symbols-outlined text-primary"
+              style="font-size: 56px; font-variation-settings:'FILL' 1;">skillet</span>
+      </div>
+    </div>
+
+    <!-- Headline -->
+    <div class="flex flex-col items-center gap-sm">
+      <h1 class="font-display-lg text-display-lg text-primary tracking-tighter drop-shadow-sm">
+        Let Him Cook...
+      </h1>
+      <p id="loading-tip" class="font-body-md text-body-md text-on-surface-variant max-w-xs">
+        Analysing your ingredients
+      </p>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="w-64 h-2 bg-surface-variant rounded-full overflow-hidden shadow-sm">
+      <div id="progress-bar" class="progress-shimmer h-full rounded-full" style="width: 15%"></div>
+    </div>
+
+    <!-- Animated dots -->
+    <div class="flex gap-2 mt-2">
+      <div class="w-2 h-2 rounded-full bg-primary animate-bounce" style="animation-delay: 0ms"></div>
+      <div class="w-2 h-2 rounded-full bg-primary-container animate-bounce" style="animation-delay: 150ms"></div>
+      <div class="w-2 h-2 rounded-full bg-secondary-container animate-bounce" style="animation-delay: 300ms"></div>
+    </div>
+
+  </main>
+</div>
+<!-- /view-loading -->
+
+
+<!-- ======================================================================
+     VIEW: RECIPE
+     ====================================================================== -->
+<div id="view-recipe" class="view min-h-screen bg-surface-bright pb-32">
+
+  <!-- Top App Bar -->
+  <header class="sticky top-0 z-40 bg-surface-bright/95 backdrop-blur-sm">
+    <div class="flex justify-between items-center w-full px-margin-mobile py-sm md:px-margin-desktop">
+      <button onclick="recipeSource === 'recipes' ? (showView('recipes'), loadRecipesView()) : showView('home')"
+              aria-label="Back"
+              class="text-on-surface-variant hover:opacity-80 transition-opacity p-2 rounded-full hover:bg-surface-container flex items-center gap-1">
+        <span class="material-symbols-outlined">arrow_back</span>
+      </button>
+      <span class="font-display-lg text-headline-md text-primary tracking-tighter">BiteRig</span>
+      <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container shadow-chef bg-surface-variant">
+        <div class="w-full h-full bg-gradient-to-br from-primary-container to-primary flex items-center justify-center">
+          <span class="material-symbols-outlined text-on-primary text-[20px]" style="font-variation-settings:'FILL' 1;">person</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-2xl mx-auto px-margin-mobile md:px-margin-desktop mt-sm">
+
+    <!-- ── Recipe Hero Card ── -->
+    <article id="recipe-card" class="bg-surface-container-lowest rounded-xl shadow-chef overflow-hidden mb-lg">
+
+      <!-- Recipe Hero — shows real dish image when available, gradient otherwise -->
+      <div id="recipe-hero" class="w-full min-h-[240px] md:min-h-[320px] relative overflow-hidden
+                                    flex flex-col justify-end p-md md:p-lg">
+        <!-- Layer 1: dish photo background (filled by JS when recipe.image_url exists) -->
+        <div id="recipe-hero-img"
+             class="absolute inset-0 bg-cover bg-center transition-opacity duration-700"
+             style="display:none; opacity:0;"></div>
+        <!-- Layer 2: gradient — brand colours when no image, dark-bottom overlay when image present -->
+        <div id="recipe-hero-gradient"
+             class="absolute inset-0 transition-all duration-500"
+             style="background: linear-gradient(135deg, #ff9f1c 0%, #895100 60%, #7f4c7f 100%);"></div>
+        <!-- Layer 3: decorative circles (only shown with the brand gradient) -->
+        <div id="recipe-hero-circles">
+          <div class="absolute -top-10 -right-10 w-48 h-48 rounded-full bg-white/10"></div>
+          <div class="absolute top-8  -left-6   w-32 h-32 rounded-full bg-white/10"></div>
+          <div class="absolute bottom-0 right-0  w-64 h-64 rounded-full bg-black/10 translate-x-16 translate-y-16"></div>
+        </div>
+        <!-- Content -->
+        <div class="relative z-10 flex flex-col gap-xs">
+          <div id="recipe-tags" class="flex flex-wrap gap-2"></div>
+          <h2 id="recipe-name"
+              class="font-display-lg text-headline-lg md:text-display-lg text-white tracking-tight drop-shadow-lg mt-1">
+            Recipe Name
+          </h2>
+        </div>
+      </div>
+
+      <!-- Info Section -->
+      <div class="p-md md:p-lg flex flex-col gap-md">
+
+        <!-- Description -->
+        <p id="recipe-description" class="font-body-lg text-body-lg text-on-surface-variant"></p>
+
+        <!-- Meta grid -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-sm">
+          <div class="bg-surface-container rounded-lg p-sm flex flex-col items-center gap-1">
+            <span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings:'FILL' 1;">soup_kitchen</span>
+            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Prep</span>
+            <span id="recipe-prep" class="font-label-lg text-label-lg text-on-surface">—</span>
+          </div>
+          <div class="bg-surface-container rounded-lg p-sm flex flex-col items-center gap-1">
+            <span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings:'FILL' 1;">timer</span>
+            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Cook</span>
+            <span id="recipe-cook" class="font-label-lg text-label-lg text-on-surface">—</span>
+          </div>
+          <div class="bg-surface-container rounded-lg p-sm flex flex-col items-center gap-1">
+            <span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings:'FILL' 1;">local_fire_department</span>
+            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Level</span>
+            <span id="recipe-difficulty" class="font-label-lg text-label-lg text-on-surface">—</span>
+          </div>
+          <div class="bg-surface-container rounded-lg p-sm flex flex-col items-center gap-1">
+            <span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings:'FILL' 1;">group</span>
+            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Serves</span>
+            <span id="recipe-servings" class="font-label-lg text-label-lg text-on-surface">—</span>
+          </div>
+        </div>
+
+      </div>
+    </article>
+
+    <!-- ── Ingredients ── -->
+    <section class="mb-lg">
+      <h3 class="font-headline-md text-headline-md text-on-surface mb-sm px-1">What You'll Need</h3>
+
+      <div class="bg-surface-container-lowest rounded-xl shadow-chef overflow-hidden">
+        <!-- Detected from photo -->
+        <div class="p-md border-b border-outline-variant/30">
+          <h4 class="font-label-lg text-label-lg text-on-surface-variant uppercase tracking-wider mb-sm flex items-center gap-2">
+            <span class="material-symbols-outlined text-[16px]" style="font-variation-settings:'FILL' 1;">photo_camera</span>
+            From your photo
+          </h4>
+          <div id="detected-ingredients" class="flex flex-wrap gap-2"></div>
+        </div>
+        <!-- Additional needed -->
+        <div id="additional-section" class="p-md">
+          <h4 class="font-label-lg text-label-lg text-on-surface-variant uppercase tracking-wider mb-sm flex items-center gap-2">
+            <span class="material-symbols-outlined text-[16px]" style="font-variation-settings:'FILL' 1;">add_shopping_cart</span>
+            Also needed
+          </h4>
+          <div id="additional-ingredients" class="flex flex-wrap gap-2"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Steps ── -->
+    <section class="mb-lg">
+      <h3 class="font-headline-md text-headline-md text-on-surface mb-sm px-1">The Process</h3>
+      <div id="recipe-steps" class="flex flex-col bg-surface-container-lowest rounded-xl shadow-chef overflow-hidden"></div>
+    </section>
+
+    <!-- ── Pro Tip ── -->
+    <section id="tip-section" class="mb-lg hidden">
+      <div class="bg-secondary-container/30 border border-secondary-container rounded-xl p-md flex gap-md items-start">
+        <span class="material-symbols-outlined text-secondary text-[28px] flex-shrink-0 mt-1" style="font-variation-settings:'FILL' 1;">tips_and_updates</span>
+        <div>
+          <h4 class="font-label-lg text-label-lg text-secondary uppercase tracking-wider mb-1">Chef's Tip</h4>
+          <p id="recipe-tip" class="font-body-md text-body-md text-on-surface"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Cook Again CTA ── -->
+    <section class="mb-xl flex flex-col items-center gap-sm">
+      <button id="btn-cook-again"
+              onclick="showView('home')"
+              class="bg-primary text-on-primary rounded-full px-10 py-5 font-headline-md text-headline-md flex items-center gap-3 hover:opacity-90 transition-opacity shadow-chef">
+        <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">local_fire_department</span>
+        Cook Again
+      </button>
+      <p class="font-label-sm text-label-sm text-on-surface-variant">Try a different photo or cuisine</p>
+    </section>
+
+  </main>
+
+  <!-- Bottom Nav -->
+  <nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-sm pb-6 pt-2
+              bg-surface-container-lowest rounded-t-lg shadow-[0_-4px_20px_0px_rgba(127,76,127,0.15)] md:hidden">
+    <button onclick="showView('home')"
+            class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-high transition-colors rounded-full">
+      <span class="material-symbols-outlined mb-1">home</span>
+      <span class="font-label-sm text-label-sm">Home</span>
+    </button>
+    <button class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-high transition-colors rounded-full">
+      <span class="material-symbols-outlined mb-1">photo_camera</span>
+      <span class="font-label-sm text-label-sm">Camera</span>
+    </button>
+    <button onclick="showView('recipes'); loadRecipesView()"
+            class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 scale-90 duration-200">
+      <span class="material-symbols-outlined mb-1" style="font-variation-settings:'FILL' 1;">receipt_long</span>
+      <span class="font-label-sm text-label-sm font-bold">Recipes</span>
+    </button>
+    <button class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-high transition-colors rounded-full">
+      <span class="material-symbols-outlined mb-1">person</span>
+      <span class="font-label-sm text-label-sm">Profile</span>
+    </button>
+  </nav>
+</div>
+<!-- /view-recipe -->
+
+
+<!-- ======================================================================
+     VIEW: RECIPES HISTORY
+     ====================================================================== -->
+<div id="view-recipes" class="view min-h-screen bg-surface-bright bg-noise pb-32">
+
+  <!-- Top App Bar -->
+  <header class="sticky top-0 z-40 bg-surface-bright/95 backdrop-blur-sm">
+    <div class="flex justify-between items-center w-full px-margin-mobile py-sm md:px-margin-desktop">
+      <span class="font-display-lg text-headline-md text-primary tracking-tighter">BiteRig</span>
+      <h2 class="font-headline-md text-headline-md text-on-surface">My Recipes</h2>
+      <button id="btn-refresh-recipes"
+              onclick="loadRecipesView()"
+              aria-label="Refresh"
+              class="text-on-surface-variant p-2 rounded-full hover:bg-surface-container transition-colors">
+        <span class="material-symbols-outlined">refresh</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="max-w-md mx-auto px-margin-mobile mt-sm flex flex-col gap-sm">
+
+    <!-- Empty state -->
+    <div id="recipes-empty" class="hidden flex-col items-center justify-center text-center py-xl gap-lg">
+      <div class="w-24 h-24 rounded-full bg-surface-container flex items-center justify-center">
+        <span class="material-symbols-outlined text-[48px] text-on-surface-variant" style="font-variation-settings:'FILL' 1;">receipt_long</span>
+      </div>
+      <div>
+        <h3 class="font-headline-md text-headline-md text-on-surface">No recipes yet</h3>
+        <p class="font-body-md text-body-md text-on-surface-variant mt-1">Cook something to see your recipe history here!</p>
+      </div>
+      <button onclick="showView('home')"
+              class="bg-primary text-on-primary rounded-full px-8 py-4 font-label-lg text-label-lg flex items-center gap-2 shadow-chef">
+        <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">local_fire_department</span>
+        Start Cooking
+      </button>
+    </div>
+
+    <!-- Loading state -->
+    <div id="recipes-loading" class="hidden flex-col items-center justify-center py-xl gap-sm">
+      <div class="w-8 h-8 border-4 border-primary-container border-t-primary rounded-full animate-spin"></div>
+      <p class="font-label-lg text-label-lg text-on-surface-variant">Loading recipes…</p>
+    </div>
+
+    <!-- Error state -->
+    <div id="recipes-error" class="hidden flex-col items-center justify-center text-center py-xl gap-md">
+      <span class="material-symbols-outlined text-[40px] text-error" style="font-variation-settings:'FILL' 1;">wifi_off</span>
+      <div>
+        <h3 class="font-headline-md text-headline-md text-on-surface">Couldn't load recipes</h3>
+        <p class="font-body-md text-body-md text-on-surface-variant mt-1">Make sure the backend is running</p>
+      </div>
+      <button onclick="loadRecipesView()"
+              class="bg-surface-container text-on-surface rounded-full px-6 py-3 font-label-lg text-label-lg">
+        Try Again
+      </button>
+    </div>
+
+    <!-- Recipe cards list -->
+    <div id="recipes-list" class="flex flex-col gap-sm"></div>
+
+  </main>
+
+  <!-- Bottom Nav -->
+  <nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-sm pb-6 pt-2
+              bg-surface-container-lowest rounded-t-lg shadow-[0_-4px_20px_0px_rgba(127,76,127,0.15)] md:hidden">
+    <button onclick="showView('home')"
+            class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-high transition-colors rounded-full">
+      <span class="material-symbols-outlined mb-1">home</span>
+      <span class="font-label-sm text-label-sm">Home</span>
+    </button>
+    <button onclick="showView('home'); setTimeout(() => document.getElementById('file-upload').click(), 200)"
+            class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-high transition-colors rounded-full">
+      <span class="material-symbols-outlined mb-1">photo_camera</span>
+      <span class="font-label-sm text-label-sm">Camera</span>
+    </button>
+    <button class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 scale-90 duration-200">
+      <span class="material-symbols-outlined mb-1" style="font-variation-settings:'FILL' 1;">receipt_long</span>
+      <span class="font-label-sm text-label-sm font-bold">Recipes</span>
+    </button>
+    <button class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-high transition-colors rounded-full">
+      <span class="material-symbols-outlined mb-1">person</span>
+      <span class="font-label-sm text-label-sm">Profile</span>
+    </button>
+  </nav>
+</div>
+<!-- /view-recipes -->
+
+
+<!-- ======================================================================
+     CAMERA MODAL (getUserMedia)
+     ====================================================================== -->
+<div id="camera-modal"
+     class="hidden fixed inset-0 z-[200] bg-black/95 flex flex-col items-center justify-center p-6 gap-lg">
+
+  <!-- Close button -->
+  <button onclick="closeCamera()"
+          class="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-colors">
+    <span class="material-symbols-outlined">close</span>
+  </button>
+
+  <!-- Video feed -->
+  <div class="relative w-full max-w-sm rounded-xl overflow-hidden shadow-2xl border-2 border-white/20">
+    <video id="camera-feed" class="w-full aspect-[3/4] object-cover block" autoplay playsinline muted></video>
+    <!-- Viewfinder overlay -->
+    <div class="absolute inset-0 border-2 border-white/30 rounded-xl m-4 pointer-events-none"></div>
+  </div>
+
+  <!-- Camera controls -->
+  <div class="flex items-center gap-6">
+    <!-- Switch camera -->
+    <button id="btn-switch-camera"
+            onclick="switchCamera()"
+            class="w-12 h-12 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-colors">
+      <span class="material-symbols-outlined">flip_camera_ios</span>
+    </button>
+
+    <!-- Capture button -->
+    <button id="btn-capture"
+            onclick="capturePhoto()"
+            class="w-20 h-20 rounded-full bg-white border-4 border-primary-container
+                   flex items-center justify-center shadow-xl hover:scale-105 transition-transform active:scale-95">
+      <div class="w-14 h-14 rounded-full bg-primary-container"></div>
+    </button>
+
+    <!-- Upload from gallery -->
+    <button onclick="closeCamera(); document.getElementById('file-upload').click()"
+            class="w-12 h-12 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-colors">
+      <span class="material-symbols-outlined">photo_library</span>
+    </button>
+  </div>
+
+  <p class="text-white/60 font-label-sm text-label-sm">Tap the circle to capture</p>
+</div>
+
+<!-- ── Hidden file inputs ── -->
+<input type="file" id="file-upload" accept="image/*" class="hidden" onchange="handleFileSelect(this)"/>
+<!-- Fallback for camera if getUserMedia fails -->
+<input type="file" id="camera-input-fallback" accept="image/*" capture="environment" class="hidden" onchange="handleFileSelect(this)"/>
+
+<!-- ── Scripts ── -->
+<script src="config.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
