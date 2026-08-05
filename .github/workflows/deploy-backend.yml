@@ -17,14 +17,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # ── Optional: run tests here ──────────────────────────────────────────
+      - name: Package backend folder into zip
+        # zip the CONTENTS of backend/ so requirements.txt lands at root on Azure
+        run: |
+          cd backend
+          zip -r ../deploy.zip . \
+            --exclude "*.pyc" \
+            --exclude "__pycache__/*" \
+            --exclude ".env" \
+            --exclude "data/*" \
+            --exclude "test_*"
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          # The name of your Azure App Service (Web App)
           app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
-          # Download this from: Azure Portal → App Service → Deployment Center → Manage publish profile
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          # Only deploy the backend/ folder — not the whole repo
-          package: './backend'
+          package: './deploy.zip'
+
