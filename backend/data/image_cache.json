@@ -4,5 +4,33 @@
     "dish": "Protein-Packed Classic Smash Burgers",
     "source": "none",
     "cached_at": "2026-07-28T09:13:11.150182+00:00"
+  },
+  "the ultimate backyard steakhouse burger": {
+    "url": "https://www.themealdb.com/images/media/meals/ytuvwr1503070420.jpg",
+    "dish": "The Ultimate Backyard Steakhouse Burger",
+    "nationality": "American",
+    "source": "pexels",
+    "cached_at": "2026-08-05T05:04:49.117772+00:00"
+  },
+  "the ultimate gourmet backyard smash burger": {
+    "url": "https://www.themealdb.com/images/media/meals/ytuvwr1503070420.jpg",
+    "dish": "The Ultimate Gourmet Backyard Smash Burger",
+    "nationality": "American",
+    "source": "pexels",
+    "cached_at": "2026-08-05T05:11:44.825659+00:00"
+  },
+  "golden crispy aloo pakoras": {
+    "url": null,
+    "dish": "Golden Crispy Aloo Pakoras",
+    "nationality": "Indian",
+    "source": "none",
+    "cached_at": "2026-08-05T05:14:32.114927+00:00"
+  },
+  "golden spiced chickpea potato patties": {
+    "url": null,
+    "dish": "Golden Spiced Chickpea Potato Patties",
+    "nationality": null,
+    "source": "none",
+    "cached_at": "2026-08-05T05:21:21.776645+00:00"
   }
 }

@@ -347,30 +347,8 @@
 
   </main>
 
-  <!-- Bottom Nav -->
-  <nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-sm pb-6 pt-2
-              bg-surface-container-lowest rounded-t-lg shadow-[0_-4px_20px_0px_rgba(127,76,127,0.15)] md:hidden">
-    <button onclick="showView('home')"
-            class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-high transition-colors rounded-full">
-      <span class="material-symbols-outlined mb-1">home</span>
-      <span class="font-label-sm text-label-sm">Home</span>
-    </button>
-    <button onclick="document.getElementById('file-upload').click()"
-            class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 scale-90 duration-200">
-      <span class="material-symbols-outlined mb-1" style="font-variation-settings:'FILL' 1;">photo_camera</span>
-      <span class="font-label-sm text-label-sm font-bold">Camera</span>
-    </button>
-    <button onclick="showView('recipes'); loadRecipesView()"
-            class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-high transition-colors rounded-full">
-      <span class="material-symbols-outlined mb-1">receipt_long</span>
-      <span class="font-label-sm text-label-sm">Recipes</span>
-    </button>
-    <button class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-high transition-colors rounded-full">
-      <span class="material-symbols-outlined mb-1">person</span>
-      <span class="font-label-sm text-label-sm">Profile</span>
-    </button>
-  </nav>
 </div>
+<!-- /view-home -->
 <!-- /view-home -->
 
 
@@ -488,29 +466,38 @@
         <!-- Description -->
         <p id="recipe-description" class="font-body-lg text-body-lg text-on-surface-variant"></p>
 
-        <!-- Meta grid -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-sm">
-          <div class="bg-surface-container rounded-lg p-sm flex flex-col items-center gap-1">
-            <span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings:'FILL' 1;">soup_kitchen</span>
-            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Prep</span>
-            <span id="recipe-prep" class="font-label-lg text-label-lg text-on-surface">—</span>
+        <!-- Meta grid (4 Capsule Pills) -->
+        <div class="grid grid-cols-4 gap-2 my-1">
+          <!-- Prep -->
+          <div class="bg-surface-container/80 rounded-3xl px-2 py-4 flex flex-col items-center justify-center text-center gap-1 min-w-0">
+            <span class="material-symbols-outlined text-primary text-[22px] select-none" style="font-variation-settings:'FILL' 1;">skillet</span>
+            <span class="font-label-sm text-[10px] sm:text-[11px] uppercase tracking-wider text-on-surface-variant font-bold">PREP</span>
+            <span id="recipe-prep" class="font-headline-md text-[12px] sm:text-[14px] font-extrabold text-on-surface whitespace-nowrap truncate w-full px-1">—</span>
           </div>
-          <div class="bg-surface-container rounded-lg p-sm flex flex-col items-center gap-1">
-            <span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings:'FILL' 1;">timer</span>
-            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Cook</span>
-            <span id="recipe-cook" class="font-label-lg text-label-lg text-on-surface">—</span>
+
+          <!-- Cook -->
+          <div class="bg-surface-container/80 rounded-3xl px-2 py-4 flex flex-col items-center justify-center text-center gap-1 min-w-0">
+            <span class="material-symbols-outlined text-primary text-[22px] select-none" style="font-variation-settings:'FILL' 1;">timer</span>
+            <span class="font-label-sm text-[10px] sm:text-[11px] uppercase tracking-wider text-on-surface-variant font-bold">COOK</span>
+            <span id="recipe-cook" class="font-headline-md text-[12px] sm:text-[14px] font-extrabold text-on-surface whitespace-nowrap truncate w-full px-1">—</span>
           </div>
-          <div class="bg-surface-container rounded-lg p-sm flex flex-col items-center gap-1">
-            <span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings:'FILL' 1;">local_fire_department</span>
-            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Level</span>
-            <span id="recipe-difficulty" class="font-label-lg text-label-lg text-on-surface">—</span>
+
+          <!-- Level -->
+          <div class="bg-surface-container/80 rounded-3xl px-2 py-4 flex flex-col items-center justify-center text-center gap-1 min-w-0">
+            <span class="material-symbols-outlined text-primary text-[22px] select-none" style="font-variation-settings:'FILL' 1;">local_fire_department</span>
+            <span class="font-label-sm text-[10px] sm:text-[11px] uppercase tracking-wider text-on-surface-variant font-bold">LEVEL</span>
+            <span id="recipe-difficulty" class="font-headline-md text-[12px] sm:text-[14px] font-extrabold text-on-surface whitespace-nowrap truncate w-full px-1">—</span>
           </div>
-          <div class="bg-surface-container rounded-lg p-sm flex flex-col items-center gap-1">
-            <span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings:'FILL' 1;">group</span>
-            <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Serves</span>
-            <span id="recipe-servings" class="font-label-lg text-label-lg text-on-surface">—</span>
+
+          <!-- Serves -->
+          <div class="bg-surface-container/80 rounded-3xl px-2 py-4 flex flex-col items-center justify-center text-center gap-1 min-w-0">
+            <span class="material-symbols-outlined text-primary text-[22px] select-none" style="font-variation-settings:'FILL' 1;">group</span>
+            <span class="font-label-sm text-[10px] sm:text-[11px] uppercase tracking-wider text-on-surface-variant font-bold">SERVES</span>
+            <span id="recipe-servings" class="font-headline-md text-[12px] sm:text-[14px] font-extrabold text-on-surface whitespace-nowrap truncate w-full px-1">—</span>
           </div>
         </div>
+
+
 
       </div>
     </article>
@@ -569,29 +556,8 @@
 
   </main>
 
-  <!-- Bottom Nav -->
-  <nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-sm pb-6 pt-2
-              bg-surface-container-lowest rounded-t-lg shadow-[0_-4px_20px_0px_rgba(127,76,127,0.15)] md:hidden">
-    <button onclick="showView('home')"
-            class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-high transition-colors rounded-full">
-      <span class="material-symbols-outlined mb-1">home</span>
-      <span class="font-label-sm text-label-sm">Home</span>
-    </button>
-    <button class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-high transition-colors rounded-full">
-      <span class="material-symbols-outlined mb-1">photo_camera</span>
-      <span class="font-label-sm text-label-sm">Camera</span>
-    </button>
-    <button onclick="showView('recipes'); loadRecipesView()"
-            class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 scale-90 duration-200">
-      <span class="material-symbols-outlined mb-1" style="font-variation-settings:'FILL' 1;">receipt_long</span>
-      <span class="font-label-sm text-label-sm font-bold">Recipes</span>
-    </button>
-    <button class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-high transition-colors rounded-full">
-      <span class="material-symbols-outlined mb-1">person</span>
-      <span class="font-label-sm text-label-sm">Profile</span>
-    </button>
-  </nav>
 </div>
+<!-- /view-recipe -->
 <!-- /view-recipe -->
 
 
@@ -656,29 +622,8 @@
 
   </main>
 
-  <!-- Bottom Nav -->
-  <nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-sm pb-6 pt-2
-              bg-surface-container-lowest rounded-t-lg shadow-[0_-4px_20px_0px_rgba(127,76,127,0.15)] md:hidden">
-    <button onclick="showView('home')"
-            class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-high transition-colors rounded-full">
-      <span class="material-symbols-outlined mb-1">home</span>
-      <span class="font-label-sm text-label-sm">Home</span>
-    </button>
-    <button onclick="showView('home'); setTimeout(() => document.getElementById('file-upload').click(), 200)"
-            class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-high transition-colors rounded-full">
-      <span class="material-symbols-outlined mb-1">photo_camera</span>
-      <span class="font-label-sm text-label-sm">Camera</span>
-    </button>
-    <button class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 scale-90 duration-200">
-      <span class="material-symbols-outlined mb-1" style="font-variation-settings:'FILL' 1;">receipt_long</span>
-      <span class="font-label-sm text-label-sm font-bold">Recipes</span>
-    </button>
-    <button class="flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-high transition-colors rounded-full">
-      <span class="material-symbols-outlined mb-1">person</span>
-      <span class="font-label-sm text-label-sm">Profile</span>
-    </button>
-  </nav>
 </div>
+<!-- /view-recipes -->
 <!-- /view-recipes -->
 
 
@@ -728,6 +673,44 @@
   <p class="text-white/60 font-label-sm text-label-sm">Tap the circle to capture</p>
 </div>
 
+<!-- ======================================================================
+     GLOBAL FIXED BOTTOM NAV BAR
+     ====================================================================== -->
+<nav id="global-bottom-nav"
+     class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md z-[150]
+            flex justify-around items-center px-4 pb-5 pt-2
+            bg-surface-container-lowest/95 backdrop-blur-md rounded-t-2xl shadow-[0_-4px_25px_0px_rgba(127,76,127,0.15)] border-t border-outline-variant/20">
+  
+  <!-- Home -->
+  <button id="nav-btn-home" onclick="showView('home')"
+          class="nav-tab-btn flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 font-bold scale-90 duration-200">
+    <span class="material-symbols-outlined mb-0.5 text-[22px]">home</span>
+    <span class="font-label-sm text-[11px]">Home</span>
+  </button>
+
+  <!-- Camera -->
+  <button id="nav-btn-camera" onclick="openCamera()"
+          class="nav-tab-btn flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-high transition-colors rounded-full">
+    <span class="material-symbols-outlined mb-0.5 text-[22px]" style="font-variation-settings:'FILL' 1;">photo_camera</span>
+    <span class="font-label-sm text-[11px]">Camera</span>
+  </button>
+
+  <!-- Recipes -->
+  <button id="nav-btn-recipes" onclick="showView('recipes'); loadRecipesView()"
+          class="nav-tab-btn flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-high transition-colors rounded-full">
+    <span class="material-symbols-outlined mb-0.5 text-[22px]">receipt_long</span>
+    <span class="font-label-sm text-[11px]">Recipes</span>
+  </button>
+
+  <!-- Profile -->
+  <button id="nav-btn-profile" onclick="showToast('BiteRig Chef AI Ready 👨‍🍳', 'success')"
+          class="nav-tab-btn flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-high transition-colors rounded-full">
+    <span class="material-symbols-outlined mb-0.5 text-[22px]">person</span>
+    <span class="font-label-sm text-[11px]">Profile</span>
+  </button>
+
+</nav>
+
 <!-- ── Hidden file inputs ── -->
 <input type="file" id="file-upload" accept="image/*" class="hidden" onchange="handleFileSelect(this)"/>
 <!-- Fallback for camera if getUserMedia fails -->
@@ -739,3 +722,4 @@
 
 </body>
 </html>
+

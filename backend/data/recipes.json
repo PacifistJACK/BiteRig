@@ -1,5 +1,311 @@
 [
   {
+    "id": "9c45d106-b0fb-4cbc-8a0b-f8aef8ad27c8",
+    "created_at": "2026-08-05T05:21:02.247705+00:00",
+    "filters": [
+      "Vegetarian"
+    ],
+    "nationality": null,
+    "recipe": {
+      "recipe_name": "Golden Spiced Chickpea Potato Patties",
+      "description": "Crispy on the outside and soft on the inside, these savory patties are packed with aromatic spices. A perfect vegetarian snack or breakfast option.",
+      "detected_ingredients": [
+        "Boiled Potato",
+        "Chickpea Flour",
+        "Oil",
+        "Curry Leaves",
+        "Urad Dal",
+        "Ginger",
+        "Garlic",
+        "Chili paste",
+        "Salt",
+        "Spices",
+        "Sugar",
+        "Cilantro"
+      ],
+      "additional_ingredients": [
+        "Water (as needed for consistency)",
+        "Lemon juice (optional for brightness)"
+      ],
+      "prep_time": "15 mins",
+      "cook_time": "15 mins",
+      "total_time": "30 mins",
+      "difficulty": "Easy",
+      "servings": "2-4 people",
+      "tags": [
+        "Vegetarian",
+        "Gluten-Free",
+        "Savory",
+        "Quick"
+      ],
+      "tips": "Ensure the boiled potatoes are completely cooled before mashing to prevent the patties from becoming too soft.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Mash the Base",
+          "instruction": "In a large bowl, mash the boiled potatoes until smooth and lump-free."
+        },
+        {
+          "step": 2,
+          "title": "Season and Bind",
+          "instruction": "Mix the mashed potatoes with chickpea flour, salt, sugar, spices, ginger, garlic, chili paste, and urad dal until well combined."
+        },
+        {
+          "step": 3,
+          "title": "Form the Patties",
+          "instruction": "Divide the mixture into equal portions and shape them into small, flat patties."
+        },
+        {
+          "step": 4,
+          "title": "Temper the Oil",
+          "instruction": "Heat oil in a pan over medium heat and add the curry leaves to release their aroma."
+        },
+        {
+          "step": 5,
+          "title": "Fry until Golden",
+          "instruction": "Carefully place the patties in the pan and fry for 3-4 minutes per side until golden brown and crispy."
+        },
+        {
+          "step": 6,
+          "title": "Garnish and Serve",
+          "instruction": "Remove from heat and garnish with freshly chopped cilantro. Serve warm."
+        }
+      ],
+      "id": "9c45d106-b0fb-4cbc-8a0b-f8aef8ad27c8",
+      "created_at": "2026-08-05T05:21:02.247705+00:00",
+      "image_url": null
+    }
+  },
+  {
+    "id": "dcdd87d5-be1b-4ca0-b0b4-489c16ba53c5",
+    "created_at": "2026-08-05T05:14:30.743644+00:00",
+    "filters": [
+      "Vegetarian"
+    ],
+    "nationality": "Indian",
+    "recipe": {
+      "recipe_name": "Golden Crispy Aloo Pakoras",
+      "description": "A delicious Indian-inspired snack of crispy potato fritters coated in a spiced chickpea batter. These savory delights are perfect for a rainy afternoon tea or a quick snack.",
+      "detected_ingredients": [
+        "Boiled potato",
+        "Chickpea flour",
+        "Curry leaves",
+        "Oil",
+        "Urad dal",
+        "Ginger",
+        "Garlic",
+        "Chili paste",
+        "Spices",
+        "Salt",
+        "Sugar",
+        "Cilantro"
+      ],
+      "additional_ingredients": [
+        "Water",
+        "Water (for frying)"
+      ],
+      "prep_time": "20 mins",
+      "cook_time": "15 mins",
+      "total_time": "35 mins",
+      "difficulty": "Easy",
+      "servings": "2-4 people",
+      "tags": [
+        "Vegetarian",
+        "Indian",
+        "Fried",
+        "Snack"
+      ],
+      "tips": "Ensure the oil is at the correct temperature; if it's too cold, the fritters will absorb too much oil and become greasy.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Prep the Potatoes",
+          "instruction": "Peel the boiled potatoes and slice them into thin, even rounds or thick wedges for even cooking."
+        },
+        {
+          "step": 2,
+          "title": "Make the Batter",
+          "instruction": "In a large bowl, whisk together the chickpea flour, urad dal, salt, sugar, and spices. Slowly add water, stirring constantly until you reach a thick, smooth consistency that coats the back of a spoon."
+        },
+        {
+          "step": 3,
+          "title": "Flavor the Batter",
+          "instruction": "Fold in the minced ginger, garlic, chili paste, and finely chopped cilantro to the batter to infuse it with aromatics."
+        },
+        {
+          "step": 4,
+          "title": "Heat the Oil",
+          "instruction": "Heat the oil in a deep pan. To test it, drop a tiny bit of batter into the oil; if it sizzles and rises immediately, it's ready."
+        },
+        {
+          "step": 5,
+          "title": "Fry the Pakoras",
+          "instruction": "Dip the potato slices into the batter, coating them thoroughly. Carefully drop them into the hot oil along with a few curry leaves for extra fragrance."
+        },
+        {
+          "step": 6,
+          "title": "Crisp and Serve",
+          "instruction": "Fry until the pakoras are golden brown and crispy on both sides. Drain on paper towels and serve hot with chutney or tea."
+        }
+      ],
+      "id": "dcdd87d5-be1b-4ca0-b0b4-489c16ba53c5",
+      "created_at": "2026-08-05T05:14:30.743644+00:00",
+      "image_url": null
+    }
+  },
+  {
+    "id": "72142501-0eb9-4fb0-8e93-8432311cffa8",
+    "created_at": "2026-08-05T05:11:43.418843+00:00",
+    "filters": [
+      "High Protein",
+      "Under 20 Minutes"
+    ],
+    "nationality": "American",
+    "recipe": {
+      "recipe_name": "The Ultimate Gourmet Backyard Smash Burger",
+      "description": "A high-protein masterpiece featuring succulent, hand-pressed beef patties draped in melted cheese, nestled within toasted brioche buns. It's a nostalgic American classic elevated with fresh crunch and savory tang.",
+      "detected_ingredients": [
+        "ground beef",
+        "sesame seed buns",
+        "cheddar cheese slices",
+        "sliced tomatoes",
+        "lettuce",
+        "pickles",
+        "red onion",
+        "mayonnaise",
+        "salt",
+        "black pepper"
+      ],
+      "additional_ingredients": [
+        "unsalted butter",
+        "neutral cooking oil"
+      ],
+      "prep_time": "10 minutes",
+      "cook_time": "8 minutes",
+      "total_time": "18 minutes",
+      "difficulty": "Easy",
+      "servings": "2-4 people",
+      "tags": [
+        "High Protein",
+        "American",
+        "Quick",
+        "Main Course"
+      ],
+      "tips": "For that authentic restaurant crust, ensure your cast iron skillet is screaming hot before adding the beef; that Maillard reaction is where the flavor lives.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Prep the Station",
+          "instruction": "Organize your workspace by slicing the tomatoes and red onions if not already done. Set out your buns, condiments, and toppings so they are ready to assembly once the beef is cooked."
+        },
+        {
+          "step": 2,
+          "title": "Shape the Patties",
+          "instruction": "Divide the ground beef into equal portions. Gently shape them into spheres, then flatten them into discs that are slightly wider than your buns, as they will shrink during cooking. Season both sides generously with salt and pepper."
+        },
+        {
+          "step": 3,
+          "title": "Toast the Buns",
+          "instruction": "Heat a small amount of butter in a pan over medium heat. Place the buns face down and toast until golden brown and slightly crisp. Remove and set aside."
+        },
+        {
+          "step": 4,
+          "title": "The Searing Process",
+          "instruction": "Turn your heat up to medium-high. Add a thin layer of oil to a heavy skillet. Place the beef patties in the pan and press down firmly with a spatula to create a thin, even patty. Cook for 2-3 minutes until a deep brown crust forms."
+        },
+        {
+          "step": 5,
+          "title": "Melt the Cheese",
+          "instruction": "Flip the patties carefully. Immediately place a slice of cheese on each patty. Cover the pan with a lid for 30-60 seconds to allow the steam to melt the cheese into every crevice of the meat."
+        },
+        {
+          "step": 6,
+          "title": "Assembly Mastery",
+          "instruction": "Spread a generous layer of mayonnaise on the bottom bun. Layer on the lettuce, followed by a patty, tomato slices, red onion, and pickles. Top with the second bun and serve immediately while hot."
+        }
+      ],
+      "id": "72142501-0eb9-4fb0-8e93-8432311cffa8",
+      "created_at": "2026-08-05T05:11:43.418843+00:00",
+      "image_url": "https://www.themealdb.com/images/media/meals/ytuvwr1503070420.jpg"
+    }
+  },
+  {
+    "id": "f235e2bc-c017-49ec-8bd7-b084a5f31054",
+    "created_at": "2026-08-05T05:04:47.031726+00:00",
+    "filters": [
+      "High Protein"
+    ],
+    "nationality": "American",
+    "recipe": {
+      "recipe_name": "The Ultimate Backyard Steakhouse Burger",
+      "description": "A towering, juicy masterpiece featuring premium ground beef, melted cheddar, and crisp garden-fresh toppings. This high-protein classic is designed to satisfy even the most intense cravings with its rich, smoky flavors.",
+      "detected_ingredients": [
+        "ground beef",
+        "burger buns",
+        "cheddar cheese slices",
+        "lettuce",
+        "tomato slices",
+        "red onion slices",
+        "pickles",
+        "mayonnaise",
+        "salt",
+        "black pepper"
+      ],
+      "additional_ingredients": [
+        "butter",
+        "olive oil",
+        "Worcestershire sauce"
+      ],
+      "prep_time": "15 minutes",
+      "cook_time": "10 minutes",
+      "total_time": "25 minutes",
+      "difficulty": "Medium",
+      "servings": "4 people",
+      "tags": [
+        "High Protein",
+        "American",
+        "Main Course",
+        "Dinner"
+      ],
+      "tips": "Chill your beef patties in the fridge for 15 minutes before cooking; it helps the fat stay intact, ensuring a juicier burger.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Prep the Patties",
+          "instruction": "Divide the ground beef into four equal portions. Gently shape them into patties about 1-inch thick, making sure not to overwork the meat. Create a small indentation with your thumb in the center of each patty to prevent bulging during cooking."
+        },
+        {
+          "step": 2,
+          "title": "Season Aggressively",
+          "instruction": "Generously season both sides of the patties with salt and freshly cracked black pepper. This is the secret to a flavorful crust."
+        },
+        {
+          "step": 3,
+          "title": "Sear to Perfection",
+          "instruction": "Heat a cast-iron skillet over medium-high heat with a touch of oil. Place the patties in the hot pan and sear for 3-4 minutes without moving them to develop a beautiful brown crust. Flip once."
+        },
+        {
+          "step": 4,
+          "title": "Melt the Cheese",
+          "instruction": "Immediately after flipping the burgers, place a slice of cheddar cheese on each patty. Cover the pan with a lid for 30-60 seconds to create steam, which melts the cheese perfectly over the beef."
+        },
+        {
+          "step": 5,
+          "title": "Toast the Buns",
+          "instruction": "While the meat rests for a minute, lightly butter the insides of the burger buns and toast them in a separate pan over medium heat until golden brown and crispy."
+        },
+        {
+          "step": 6,
+          "title": "The Assembly",
+          "instruction": "Build your masterpiece: spread mayo on the bottom bun, add lettuce, followed by the tomato slice, then the juicy cheesy patty. Top with red onions and pickles, and close with the toasted top bun."
+        }
+      ],
+      "id": "f235e2bc-c017-49ec-8bd7-b084a5f31054",
+      "created_at": "2026-08-05T05:04:47.031726+00:00",
+      "image_url": "https://www.themealdb.com/images/media/meals/ytuvwr1503070420.jpg"
+    }
+  },
+  {
     "id": "167d5ce6-72b9-49ce-9663-3f47e65fa4e5",
     "created_at": "2026-07-28T09:13:08.163518+00:00",
     "filters": [

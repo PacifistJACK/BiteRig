@@ -4,7 +4,25 @@
    camera modal styles, toast notifications, and other bespoke effects.
    ========================================================================== */
 
+/* ---- Material Symbols Icon rendering fix ---- */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
 /* ---- View system ---- */
+
 .view {
   display: none;
   animation: fadeSlideIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;

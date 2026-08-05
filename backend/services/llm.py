@@ -13,15 +13,47 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-ENDPOINT = "https://models.github.ai/inference"
-MODEL_NAME = "openai/o4-mini"
+# Default endpoint & model settings (supports OpenRouter, GitHub Models, or OpenAI)
+DEFAULT_ENDPOINT = "https://openrouter.ai/api/v1"
+DEFAULT_MODEL = "google/gemma-4-26b-a4b-it:free"
 
 
-def _get_client() -> OpenAI:
-    token = os.environ.get("GITHUB_TOKEN")
-    if not token:
-        raise ValueError("GITHUB_TOKEN environment variable is not set.")
-    return OpenAI(base_url=ENDPOINT, api_key=token)
+
+def _get_client_and_model() -> tuple[OpenAI, str]:
+    # Check for OpenRouter API Key first
+    openrouter_key = (os.environ.get("OPENROUTER_API_KEY") or "").strip()
+    if openrouter_key:
+        model = (os.environ.get("LLM_MODEL") or os.environ.get("MODEL_NAME") or DEFAULT_MODEL).strip()
+        endpoint = (os.environ.get("OPENAI_BASE_URL") or DEFAULT_ENDPOINT).strip()
+        client = OpenAI(
+            base_url=endpoint,
+            api_key=openrouter_key,
+            default_headers={
+                "HTTP-Referer": "https://github.com/PacifistJACK/BiteRig",
+                "X-OpenRouter-Title": "BiteRig",
+            },
+        )
+        return client, model
+
+    # Fallback to GitHub Models / Azure Inference
+    github_token = (os.environ.get("GITHUB_AI_TOKEN") or os.environ.get("GITHUB_TOKEN") or "").strip()
+    if github_token:
+        endpoint = (os.environ.get("OPENAI_BASE_URL") or "https://models.inference.ai.azure.com").strip()
+        model = (os.environ.get("LLM_MODEL") or os.environ.get("MODEL_NAME") or "gpt-4o-mini").strip()
+        return OpenAI(base_url=endpoint, api_key=github_token), model
+
+    # Fallback to standard OpenAI API Key
+    openai_key = (os.environ.get("OPENAI_API_KEY") or "").strip()
+    if openai_key:
+        endpoint = (os.environ.get("OPENAI_BASE_URL") or "https://api.openai.com/v1").strip()
+        model = (os.environ.get("LLM_MODEL") or os.environ.get("MODEL_NAME") or "gpt-4o-mini").strip()
+        return OpenAI(base_url=endpoint, api_key=openai_key), model
+
+    raise ValueError(
+        "No API Key found. Please set OPENROUTER_API_KEY, GITHUB_TOKEN, or OPENAI_API_KEY in backend/.env"
+    )
+
+
 
 
 def _build_constraints(filters: list[str], nationality: str | None) -> str:
@@ -77,38 +109,44 @@ def generate_recipe(
     Returns:
         A dict matching the recipe JSON schema.
     """
-    client = _get_client()
+    client, model = _get_client_and_model()
     constraints = _build_constraints(filters, nationality)
 
-    system_prompt = """You are an award-winning chef and culinary AI. Your job is to look at a photo of food ingredients and generate a stunning, creative, restaurant-quality recipe that anyone can cook at home.
 
-Return ONLY a valid JSON object — no markdown, no explanation, no code blocks. Just raw JSON.
+    system_prompt = """You are an expert chef AI. Analyze the food ingredients in the image and generate a clear, appetizing, step-by-step recipe.
 
-Use this exact schema:
+Return ONLY a raw, valid JSON object without markdown formatting, code fences, or extra commentary.
+
+JSON Schema:
 {
-  "recipe_name": "Creative and evocative dish name",
-  "description": "2-3 sentence appetizing description that makes the reader hungry",
-  "detected_ingredients": ["list of ingredients you can see in the image"],
-  "additional_ingredients": ["extra pantry ingredients needed that aren't in the image"],
-  "prep_time": "X minutes",
-  "cook_time": "X minutes",
-  "total_time": "X minutes",
+  "recipe_name": "Evocative dish name",
+  "description": "Short 2-sentence appetizing description",
+  "detected_ingredients": ["ingredient visible in image 1", "ingredient 2"],
+  "additional_ingredients": ["pantry item 1 needed", "pantry item 2"],
+  "prep_time": "15 mins",
+  "cook_time": "10 mins",
+  "total_time": "25 mins",
   "difficulty": "Easy",
-  "servings": "2-4 people",
-  "tags": ["Vegetarian", "Quick", "etc — based on actual recipe properties"],
-  "tips": "One brilliant pro chef tip for this dish",
+  "servings": "4 people",
+  "tags": ["Quick", "High Protein", "Snack"],
+  "tips": "One practical pro chef tip",
   "steps": [
-    {"step": 1, "title": "Short step title", "instruction": "Detailed, clear instruction with temperatures, timings, and technique tips"},
-    {"step": 2, "title": "Short step title", "instruction": "..."}
+    {
+      "step": 1,
+      "title": "Prep the Ingredients",
+      "instruction": "Clear, concise instruction."
+    }
   ]
 }
 
-Rules:
-- difficulty must be exactly one of: Easy, Medium, Hard
-- Include 5 to 8 steps. Each step must have a clear title and a detailed instruction.
-- detected_ingredients should list only what you can actually see in the image.
-- Make the recipe name creative and memorable.
-- The steps should be written in a confident, chef-like voice."""
+Formatting Rules:
+1. difficulty MUST be exactly one of: Easy, Medium, Hard.
+2. prep_time, cook_time, total_time MUST be short strings like '15 mins', '10 mins'.
+3. servings MUST be a short string like '2-4 people' or '4 people'.
+4. Include 4 to 7 numbered steps with short titles and actionable instructions.
+5. detected_ingredients should list only items visible in the photo.
+6. Write instructions clearly in plain, friendly chef language."""
+
 
     user_message = [
         {
@@ -133,9 +171,11 @@ Rules:
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_message},
         ],
-        model=MODEL_NAME,
-        max_completion_tokens=2000,
+        model=model,
+        max_tokens=2000,
     )
+
+
 
     raw = response.choices[0].message.content
     return _extract_json(raw)

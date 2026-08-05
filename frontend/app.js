@@ -56,7 +56,45 @@ function showView(name) {
   // Update the name variable so openSavedRecipe knows which view is "back"
   if (fullId === 'view-recipes') recipeSource = 'recipes';
   if (fullId === 'view-home')    recipeSource = 'home';
+
+  // Update global fixed bottom nav bar active state
+  updateBottomNav(fullId);
 }
+
+function updateBottomNav(viewName) {
+  const isHome    = viewName === 'home' || viewName === 'view-home';
+  const isRecipes = viewName === 'recipes' || viewName === 'view-recipes';
+  const isLoading = viewName === 'loading' || viewName === 'view-loading';
+
+  const nav = document.getElementById('global-bottom-nav');
+  if (nav) {
+    if (isLoading) {
+      nav.style.display = 'none';
+    } else {
+      nav.style.display = 'flex';
+    }
+  }
+
+  const btnHome    = document.getElementById('nav-btn-home');
+  const btnRecipes = document.getElementById('nav-btn-recipes');
+
+  if (btnHome) {
+    if (isHome) {
+      btnHome.className = 'nav-tab-btn flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 font-bold scale-90 duration-200';
+    } else {
+      btnHome.className = 'nav-tab-btn flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-high transition-colors rounded-full';
+    }
+  }
+
+  if (btnRecipes) {
+    if (isRecipes) {
+      btnRecipes.className = 'nav-tab-btn flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1 font-bold scale-90 duration-200';
+    } else {
+      btnRecipes.className = 'nav-tab-btn flex flex-col items-center justify-center text-on-surface-variant px-5 py-1 hover:bg-surface-container-high transition-colors rounded-full';
+    }
+  }
+}
+
 
 // ---------------------------------------------------------------------------
 // Toast Notifications
@@ -411,11 +449,13 @@ function renderRecipe(recipe) {
     tagsContainer.appendChild(span);
   });
 
-  // Meta
-  document.getElementById('recipe-prep').textContent      = recipe.prep_time   || '—';
-  document.getElementById('recipe-cook').textContent      = recipe.cook_time   || '—';
+  // Meta (clean & format for concise display)
+  const formatTime = str => (str || '—').replace(/minutes?/i, 'mins').replace(/seconds?/i, 'secs');
+  document.getElementById('recipe-prep').textContent      = formatTime(recipe.prep_time);
+  document.getElementById('recipe-cook').textContent      = formatTime(recipe.cook_time);
   document.getElementById('recipe-difficulty').textContent = recipe.difficulty  || '—';
   document.getElementById('recipe-servings').textContent  = recipe.servings    || '—';
+
 
   // Detected ingredients
   const detectedEl = document.getElementById('detected-ingredients');

@@ -217,15 +217,9 @@ async def cook(
     recipe["id"]         = recipe_id
     recipe["created_at"] = created_at
 
-    # --- Fetch dish image (Pexels → TheMealDB → Unsplash, then cache) ---
-    try:
-        recipe["image_url"] = get_dish_image(
-            recipe.get("recipe_name", ""),
-            nationality=clean_nationality,
-        )
-    except Exception as exc:
-        logger.warning("Image search failed: %s", exc)
-        recipe["image_url"] = None
+    # --- Dish image (disabled for fast response time) ---
+    recipe["image_url"] = None
+
 
     entry = {
         "id":          recipe_id,
