@@ -7,8 +7,9 @@
 
 const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:';
 
-// Set your Azure Container App URL here once deployed:
-const PRODUCTION_API_URL = 'REPLACE_WITH_AZURE_CONTAINER_APP_URL';
+// Azure App Service backend URL:
+const PRODUCTION_API_URL = 'https://biterig-api-a6e5fdbbdbf2dxha.centralindia-01.azurewebsites.net';
+
 
 const API_BASE_URL = IS_LOCAL ? 'http://localhost:8000' : PRODUCTION_API_URL;
 
