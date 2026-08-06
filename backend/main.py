@@ -2,7 +2,6 @@
 BiteRig Backend — FastAPI Application
 Serves the /api/cook endpoint that accepts a food image + preferences
 and returns an AI-generated recipe.
-chlooo
 """
 
 import asyncio

@@ -196,3 +196,13 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+/* ---- Brand logo text gradient matching original logo colors ---- */
+.brand-logo-text {
+  background: linear-gradient(135deg, #ff9f1c 0%, #e06820 40%, #683808 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: #895100; /* Fallback for browsers without text-fill-color */
+}
+
