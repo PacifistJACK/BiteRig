@@ -1,4 +1,4 @@
-name: Build and deploy Python app to Azure Web App - biterig-api
+name: Deploy Backend to Azure App Service
 
 on:
   push:
@@ -7,17 +7,29 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Deploy backend to Azure Web App
-        uses: azure/webapps-deploy@v3
-        with:
-          app-name: 'biterig-api'
-          slot-name: 'Production'
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: './backend'
+      - name: Zip backend for deployment
+        run: |
+          cd backend
+          zip -r ../deploy.zip . \
+            --exclude "*.pyc" \
+            --exclude "__pycache__/*" \
+            --exclude ".env" \
+            --exclude "data/*" \
+            --exclude "test_*"
+
+      - name: Deploy via Kudu ZipDeploy
+        run: |
+          curl -X POST \
+            "https://biterig-api-a6e5fdbbdbf2dxha.scm.centralindia-01.azurewebsites.net/api/zipdeploy" \
+            --user "${{ secrets.AZURE_KUDU_USERNAME }}:${{ secrets.AZURE_KUDU_PASSWORD }}" \
+            --data-binary @deploy.zip \
+            --header "Content-Type: application/octet-stream" \
+            --fail \
+            --show-error
