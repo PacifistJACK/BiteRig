@@ -25,10 +25,13 @@ jobs:
             --exclude "test_*"
 
       - name: Deploy via Kudu ZipDeploy
+        env:
+          KUDU_USER: ${{ secrets.AZURE_KUDU_USERNAME }}
+          KUDU_PASS: ${{ secrets.AZURE_KUDU_PASSWORD }}
         run: |
           curl -X POST \
             "https://biterig-api-a6e5fdbbdbf2dxha.scm.centralindia-01.azurewebsites.net/api/zipdeploy" \
-            --user "${{ secrets.AZURE_KUDU_USERNAME }}:${{ secrets.AZURE_KUDU_PASSWORD }}" \
+            --user "${KUDU_USER}:${KUDU_PASS}" \
             --data-binary @deploy.zip \
             --header "Content-Type: application/octet-stream" \
             --fail \
