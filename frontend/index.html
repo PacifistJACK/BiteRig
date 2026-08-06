@@ -6,6 +6,11 @@
   <meta name="description" content="BiteRig — Snap your ingredients, get an instant AI-generated recipe. Upload or capture a photo and let the AI chef cook."/>
   <title>BiteRig — Let Him Cook</title>
 
+  <!-- Favicon & Icons -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="shortcut icon" href="favicon.png"/>
+  <link rel="apple-touch-icon" href="assets/logo-transparent.png"/>
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -140,7 +145,11 @@
       <button aria-label="Menu" class="text-on-surface-variant hover:opacity-80 transition-opacity p-2 rounded-full hover:bg-surface-container">
         <span class="material-symbols-outlined" style="font-variation-settings:'wght' 600,'FILL' 0;">restaurant_menu</span>
       </button>
-      <h1 class="font-display-lg text-headline-md text-primary tracking-tighter">BiteRig</h1>
+      <div class="flex items-center gap-2 cursor-pointer" onclick="showView('home')">
+        <img src="assets/logo-transparent.png" alt="BiteRig Logo" class="w-9 h-9 object-contain drop-shadow-sm"/>
+        <h1 class="font-display-lg text-headline-md text-primary tracking-tighter">BiteRig</h1>
+      </div>
+
       <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container shadow-chef bg-surface-variant cursor-pointer hover:opacity-80 transition-opacity">
         <div class="w-full h-full bg-gradient-to-br from-primary-container to-primary flex items-center justify-center">
           <span class="material-symbols-outlined text-on-primary text-[20px]" style="font-variation-settings:'FILL' 1;">person</span>
@@ -371,12 +380,12 @@
       <div class="orbit-ring absolute inset-0 border-4 border-dashed border-primary-container/40 rounded-full"></div>
       <!-- Inner orbit ring -->
       <div class="orbit-ring-2 absolute inset-[16px] border-2 border-dashed border-secondary-container/60 rounded-full"></div>
-      <!-- Icon circle -->
+      <!-- Icon circle with BiteRig Logo -->
       <div class="loading-pulse absolute inset-[32px] bg-primary-container rounded-full
-                  shadow-[0_12px_40px_rgba(127,76,127,0.25)] flex items-center justify-center overflow-hidden">
-        <span class="material-symbols-outlined text-primary"
-              style="font-size: 56px; font-variation-settings:'FILL' 1;">skillet</span>
+                  shadow-[0_12px_40px_rgba(127,76,127,0.25)] flex items-center justify-center overflow-hidden p-4">
+        <img src="assets/logo-transparent.png" alt="BiteRig Chef" class="w-full h-full object-contain filter drop-shadow-md animate-pulse"/>
       </div>
+
     </div>
 
     <!-- Headline -->
@@ -419,7 +428,10 @@
               class="text-on-surface-variant hover:opacity-80 transition-opacity p-2 rounded-full hover:bg-surface-container flex items-center gap-1">
         <span class="material-symbols-outlined">arrow_back</span>
       </button>
-      <span class="font-display-lg text-headline-md text-primary tracking-tighter">BiteRig</span>
+      <div class="flex items-center gap-2 cursor-pointer" onclick="showView('home')">
+        <img src="assets/logo-transparent.png" alt="BiteRig Logo" class="w-7 h-7 object-contain drop-shadow-sm"/>
+        <span class="font-display-lg text-headline-md text-primary tracking-tighter">BiteRig</span>
+      </div>
       <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container shadow-chef bg-surface-variant">
         <div class="w-full h-full bg-gradient-to-br from-primary-container to-primary flex items-center justify-center">
           <span class="material-symbols-outlined text-on-primary text-[20px]" style="font-variation-settings:'FILL' 1;">person</span>
@@ -569,7 +581,10 @@
   <!-- Top App Bar -->
   <header class="sticky top-0 z-40 bg-surface-bright/95 backdrop-blur-sm">
     <div class="flex justify-between items-center w-full px-margin-mobile py-sm md:px-margin-desktop">
-      <span class="font-display-lg text-headline-md text-primary tracking-tighter">BiteRig</span>
+      <div class="flex items-center gap-2 cursor-pointer" onclick="showView('home')">
+        <img src="assets/logo-transparent.png" alt="BiteRig Logo" class="w-7 h-7 object-contain drop-shadow-sm"/>
+        <span class="font-display-lg text-headline-md text-primary tracking-tighter">BiteRig</span>
+      </div>
       <h2 class="font-headline-md text-headline-md text-on-surface">My Recipes</h2>
       <button id="btn-refresh-recipes"
               onclick="loadRecipesView()"
