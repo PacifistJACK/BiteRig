@@ -12,6 +12,9 @@ jobs:
   deploy:
     name: Build & Deploy to Azure App Service
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
 
     steps:
       - name: Checkout code
@@ -28,10 +31,16 @@ jobs:
             --exclude "data/*" \
             --exclude "test_*"
 
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_0F7290D9DC5D4F92BF9A92F86BD1924F }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_0FD7180504ED4AE39DFD999FDD799B82 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_B1EBCD8B2B454C6697533A030541B2F3 }}
+
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          app-name: biterig-api
+          slot-name: production
           package: './deploy.zip'
-
