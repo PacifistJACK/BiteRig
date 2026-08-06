@@ -1,5 +1,72 @@
 [
   {
+    "id": "e1b1940b-47ce-4f11-bf9c-c9b589dd313d",
+    "created_at": "2026-08-05T06:10:12.678461+00:00",
+    "filters": [
+      "Vegetarian"
+    ],
+    "nationality": null,
+    "recipe": {
+      "recipe_name": "Vegetarian Comfort Bowl",
+      "description": "A nutritious and hearty vegetarian meal designed to fuel your day. This simple dish focuses on wholesome ingredients and comforting flavors.",
+      "detected_ingredients": [],
+      "additional_ingredients": [
+        "Rice or Quinoa",
+        "Mixed vegetables (carrots, peas, corn)",
+        "Tofu or Paneer",
+        "Olive oil",
+        "Soy sauce",
+        "Salt and pepper"
+      ],
+      "prep_time": "10 mins",
+      "cook_time": "15 mins",
+      "total_time": "25 mins",
+      "difficulty": "Easy",
+      "servings": "1 person",
+      "tags": [
+        "Vegetarian",
+        "Quick",
+        "Healthy"
+      ],
+      "tips": "Sauté your vegetables on high heat for a quick sear to maintain their crisp texture and vibrant color.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Cook the Base",
+          "instruction": "Prepare your choice of rice or quinoa according to package instructions and set aside."
+        },
+        {
+          "step": 2,
+          "title": "Prep Proteins and Veggies",
+          "instruction": "Cube your tofu or paneer and chop your mixed vegetables into bite-sized pieces."
+        },
+        {
+          "step": 3,
+          "title": "Sear the Protein",
+          "instruction": "Heat olive oil in a pan and fry the tofu or paneer until golden brown on all sides."
+        },
+        {
+          "step": 4,
+          "title": "Sauté Vegetables",
+          "instruction": "Add the mixed vegetables to the pan with the protein and stir-fry for 5-7 minutes until tender."
+        },
+        {
+          "step": 5,
+          "title": "Season and Glaze",
+          "instruction": "Drizzle with soy sauce, salt, and pepper, tossing well to coat everything evenly."
+        },
+        {
+          "step": 6,
+          "title": "Assemble and Serve",
+          "instruction": "Scoop the rice or quinoa into a bowl, top with the sautéed mixture, and enjoy warm."
+        }
+      ],
+      "id": "e1b1940b-47ce-4f11-bf9c-c9b589dd313d",
+      "created_at": "2026-08-05T06:10:12.678461+00:00",
+      "image_url": null
+    }
+  },
+  {
     "id": "9c45d106-b0fb-4cbc-8a0b-f8aef8ad27c8",
     "created_at": "2026-08-05T05:21:02.247705+00:00",
     "filters": [
