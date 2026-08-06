@@ -4,6 +4,7 @@ Serves the /api/cook endpoint that accepts a food image + preferences
 and returns an AI-generated recipe.
 """
 
+import asyncio
 import base64
 import json
 import logging
@@ -195,7 +196,9 @@ async def cook(
     # --- Call LLM ---
     try:
         image_b64 = base64.b64encode(image_bytes).decode("utf-8")
-        recipe = generate_recipe(
+        # Run sync LLM call in a thread pool so it doesn't block the event loop
+        recipe = await asyncio.to_thread(
+            generate_recipe,
             image_base64=image_b64,
             image_mime=content_type,
             filters=filters_list,
