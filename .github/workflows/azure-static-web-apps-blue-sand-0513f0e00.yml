@@ -10,7 +10,6 @@ on:
       - main
 
 # Cancel any in-progress run for the same branch when a new commit is pushed
-# This prevents the queue from piling up
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -21,30 +20,21 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     permissions:
-      id-token: write
+      id-token: write   # Required for Azure GitHub Identity OIDC auth
       contents: read
     steps:
       - uses: actions/checkout@v3
         with:
           submodules: true
           lfs: false
-      - name: Get OIDC Token
-        uses: actions/github-script@v7
-        id: idtoken
-        with:
-          script: |
-            const token = await core.getIDToken()
-            core.setOutput('result', token)
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_BLUE_SAND_0513F0E00 }}
           action: "upload"
           app_location: "./frontend"
           api_location: ""
           output_location: ""
-          github_id_token: ${{ steps.idtoken.outputs.result }}
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
@@ -55,5 +45,4 @@ jobs:
         id: closepullrequest
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_BLUE_SAND_0513F0E00 }}
           action: "close"
