@@ -37,6 +37,7 @@ jobs:
             --user "${KUDU_USER}:${KUDU_PASS}" \
             --data-binary @deploy.zip \
             --header "Content-Type: application/octet-stream" \
+            --header "SCM_DO_BUILD_DURING_DEPLOYMENT: true" \
             --max-time 300 \
             --retry 2 \
             --retry-delay 10 \
