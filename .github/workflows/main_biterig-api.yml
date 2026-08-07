@@ -34,5 +34,8 @@ jobs:
             --user "${KUDU_USER}:${KUDU_PASS}" \
             --data-binary @deploy.zip \
             --header "Content-Type: application/octet-stream" \
+            --max-time 300 \
+            --retry 2 \
+            --retry-delay 10 \
             --fail \
             --show-error
