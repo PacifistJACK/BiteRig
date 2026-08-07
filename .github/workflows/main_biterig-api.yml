@@ -1,4 +1,4 @@
-name: Deploy Backend to Azure App Service
+name: Deploy BiteRig App to Azure App Service
 
 on:
   push:
@@ -14,9 +14,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Zip backend for deployment
+      - name: Zip full app (backend + frontend) for deployment
         run: |
-          cd backend
+          mkdir -p build_deploy
+          cp -r backend/* build_deploy/
+          cp -r frontend build_deploy/frontend
+          cd build_deploy
           zip -r ../deploy.zip . \
             --exclude "*.pyc" \
             --exclude "__pycache__/*" \

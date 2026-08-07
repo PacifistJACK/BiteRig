@@ -11,5 +11,8 @@ const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hos
 const PRODUCTION_API_URL = 'https://biterig-api-a6e5fdbbdbf2dxha.centralindia-01.azurewebsites.net';
 
 
-const API_BASE_URL = IS_LOCAL ? 'http://localhost:8000' : PRODUCTION_API_URL;
+const API_BASE_URL = IS_LOCAL 
+  ? 'http://localhost:8000' 
+  : (window.location.origin.includes('azurewebsites.net') || window.location.origin.includes('j4du.in') ? window.location.origin : PRODUCTION_API_URL);
+
 

@@ -94,18 +94,16 @@ def _save_recipe(entry: dict) -> None:
             json.dump(recipes, f, ensure_ascii=False, indent=2)
 
 
-# ---------------------------------------------------------------------------
-# Endpoints
-# ---------------------------------------------------------------------------
-@app.get("/")
-def root():
-    return {"message": "BiteRig API is running"}
+from fastapi.staticfiles import StaticFiles
 
-
+# ---------------------------------------------------------------------------
+# Endpoints & Static Files
+# ---------------------------------------------------------------------------
 @app.get("/api/health")
 def health_check():
     """Health check endpoint used by Azure container health probes."""
     return {"status": "ok", "service": "BiteRig API", "version": "1.0.0"}
+
 
 
 @app.get("/api/recipes", response_model=List[dict])
@@ -234,7 +232,13 @@ async def cook(
     try:
         _save_recipe(entry)
         logger.info("Recipe saved: %s (%s)", recipe.get("recipe_name"), recipe_id)
-    except OSError as exc:
-        logger.warning("Could not persist recipe to disk: %s", exc)
-
     return JSONResponse(content=recipe)
+
+
+# ---------------------------------------------------------------------------
+# Mount Frontend Static Files
+# ---------------------------------------------------------------------------
+frontend_path = Path(__file__).parent / "frontend"
+if frontend_path.exists():
+    app.mount("/", StaticFiles(directory=str(frontend_path), html=True), name="static")
+
