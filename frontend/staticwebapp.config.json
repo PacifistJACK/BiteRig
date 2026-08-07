@@ -9,13 +9,13 @@
     {
       "route": "/*.js",
       "headers": {
-        "Cache-Control": "public, max-age=31536000, immutable"
+        "Cache-Control": "no-cache"
       }
     },
     {
       "route": "/*.css",
       "headers": {
-        "Cache-Control": "public, max-age=31536000, immutable"
+        "Cache-Control": "no-cache"
       }
     },
     {
