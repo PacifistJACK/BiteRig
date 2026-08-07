@@ -4,3 +4,4 @@ gunicorn==23.0.0
 python-multipart==0.0.17
 openai==1.57.4
 python-dotenv==1.0.1
+aiofiles==24.1.0
