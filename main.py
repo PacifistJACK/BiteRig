@@ -2,6 +2,11 @@
 BiteRig Backend — FastAPI Application
 Serves the /api/cook endpoint that accepts a food image + preferences
 and returns an AI-generated recipe.
+
+Startup (local):
+    uvicorn main:app --reload --host 0.0.0.0 --port 8000
+
+Then open: http://localhost:8000
 """
 
 import asyncio
@@ -15,16 +20,16 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import List, Optional
 
+from dotenv import load_dotenv
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from dotenv import load_dotenv
+from fastapi.staticfiles import StaticFiles
 
 load_dotenv()
 
 # Import after dotenv so env vars are available
 from services.llm import generate_recipe
-from services.image_search import get_dish_image
 
 # ---------------------------------------------------------------------------
 # App setup
@@ -39,8 +44,8 @@ app = FastAPI(
     version="1.0.0",
 )
 
-# CORS — allow all origins during development.
-# In production set ALLOWED_ORIGINS env var to your Azure Static Web App URL.
+# CORS — allow all origins in development.
+# In production set ALLOWED_ORIGINS env var to your Azure App Service URL.
 allowed_origins_env = os.environ.get("ALLOWED_ORIGINS", "*")
 allowed_origins = [o.strip() for o in allowed_origins_env.split(",")]
 
@@ -89,29 +94,24 @@ def _save_recipe(entry: dict) -> None:
     with _recipes_lock:
         recipes = _load_recipes()
         recipes.insert(0, entry)
-        recipes = recipes[:200]          # keep last 200 max
+        recipes = recipes[:200]  # keep last 200 max
         with open(RECIPES_FILE, "w", encoding="utf-8") as f:
             json.dump(recipes, f, ensure_ascii=False, indent=2)
 
 
-from fastapi.staticfiles import StaticFiles
+# ---------------------------------------------------------------------------
+# API Endpoints
+# ---------------------------------------------------------------------------
 
-# ---------------------------------------------------------------------------
-# Endpoints & Static Files
-# ---------------------------------------------------------------------------
 @app.get("/api/health")
 def health_check():
-    """Health check endpoint used by Azure container health probes."""
+    """Health check endpoint."""
     return {"status": "ok", "service": "BiteRig API", "version": "1.0.0"}
-
 
 
 @app.get("/api/recipes", response_model=List[dict])
 def list_recipes():
-    """
-    Return all previously generated recipes, newest first.
-    Each entry has: id, created_at, filters, nationality, and the full recipe.
-    """
+    """Return all previously generated recipes, newest first."""
     return _load_recipes()
 
 
@@ -194,7 +194,6 @@ async def cook(
     # --- Call LLM ---
     try:
         image_b64 = base64.b64encode(image_bytes).decode("utf-8")
-        # Run sync LLM call in a thread pool so it doesn't block the event loop
         recipe = await asyncio.to_thread(
             generate_recipe,
             image_base64=image_b64,
@@ -215,30 +214,35 @@ async def cook(
     # --- Stamp with ID + timestamp and persist ---
     recipe_id = str(uuid.uuid4())
     created_at = datetime.now(timezone.utc).isoformat()
-    recipe["id"]         = recipe_id
+    recipe["id"] = recipe_id
     recipe["created_at"] = created_at
-
-    # --- Dish image (disabled for fast response time) ---
     recipe["image_url"] = None
 
-
     entry = {
-        "id":          recipe_id,
-        "created_at":  created_at,
-        "filters":     filters_list,
+        "id": recipe_id,
+        "created_at": created_at,
+        "filters": filters_list,
         "nationality": clean_nationality,
-        "recipe":      recipe,
+        "recipe": recipe,
     }
     try:
         _save_recipe(entry)
         logger.info("Recipe saved: %s (%s)", recipe.get("recipe_name"), recipe_id)
+    except Exception as save_exc:
+        logger.warning("Failed to save recipe: %s", save_exc)
+
     return JSONResponse(content=recipe)
 
 
 # ---------------------------------------------------------------------------
 # Mount Frontend Static Files
 # ---------------------------------------------------------------------------
-frontend_path = Path(__file__).parent / "frontend"
-if frontend_path.exists():
-    app.mount("/", StaticFiles(directory=str(frontend_path), html=True), name="static")
+# frontend/ lives at the same level as main.py in both local dev and Azure.
+_frontend_path = Path(__file__).parent / "frontend"
+
+if _frontend_path.exists():
+    app.mount("/", StaticFiles(directory=str(_frontend_path), html=True), name="static")
+    logger.info("Serving frontend from: %s", _frontend_path)
+else:
+    logger.warning("Frontend directory not found — only API endpoints are available.")
 

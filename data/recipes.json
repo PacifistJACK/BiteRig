@@ -1,5 +1,141 @@
 [
   {
+    "id": "833107d4-2a9d-410f-9b63-b4883fca396c",
+    "created_at": "2026-09-03T16:37:44.498998+00:00",
+    "filters": [
+      "Dessert"
+    ],
+    "nationality": null,
+    "recipe": {
+      "recipe_name": "Quick Chocolate Mug Cake",
+      "description": "A single-serving chocolate cake that bakes in a microwave in just minutes. Sweet, gooey, and perfect for an instant dessert fix!",
+      "detected_ingredients": [
+        "Vanilla Extract",
+        "Evaporated Milk",
+        "Salt",
+        "Granulated Sugar",
+        "Butter",
+        "Chocolate Chips"
+      ],
+      "additional_ingredients": [
+        "All-Purpose Flour",
+        "Cocoa Powder",
+        "Baking Powder"
+      ],
+      "prep_time": "5 mins",
+      "cook_time": "2 mins",
+      "total_time": "7 mins",
+      "difficulty": "Easy",
+      "servings": "1 person",
+      "tags": [
+        "Quick",
+        "Dessert"
+      ],
+      "tips": "Whisk the dry ingredients well before adding wet ones to avoid lumps.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Gather the Ingredients",
+          "instruction": "Measure 2 tbsp all-purpose flour, 1 tbsp cocoa powder, 1/2 tsp baking powder, 2 tsp sugar, a pinch of salt, 1 tsp vanilla extract, 2 tbsp melted butter, and 2 tbsp evaporated milk. Keep the chocolate chips on hand for topping."
+        },
+        {
+          "step": 2,
+          "title": "Combine Dry Mix",
+          "instruction": "In a mug, whisk together flour, cocoa powder, baking powder, sugar, and salt."
+        },
+        {
+          "step": 3,
+          "title": "Add Wet Ingredients",
+          "instruction": "Stir in the melted butter, vanilla extract, and evaporated milk until the batter is smooth and lump-free."
+        },
+        {
+          "step": 4,
+          "title": "Bake in Microwave",
+          "instruction": "Microwave on high for 90 seconds, then check. If still a bit gooey in the center, microwave another 15-30 seconds."
+        },
+        {
+          "step": 5,
+          "title": "Finish & Serve",
+          "instruction": "Garnish with chocolate chips, let it cool for a minute, then enjoy straight from the mug!"
+        }
+      ],
+      "id": "833107d4-2a9d-410f-9b63-b4883fca396c",
+      "created_at": "2026-09-03T16:37:44.498998+00:00",
+      "image_url": null
+    }
+  },
+  {
+    "id": "cc9baa40-492b-4cb0-89cb-ef8a78158726",
+    "created_at": "2026-09-03T16:01:17.007354+00:00",
+    "filters": [
+      "Snack"
+    ],
+    "nationality": null,
+    "recipe": {
+      "recipe_name": "Mini Cheeseburger Sliders",
+      "description": "These mini cheeseburger sliders are juicy, melty, and perfect for a quick snack. Ready in under 30 minutes, they deliver big flavor in a bite‑size package.",
+      "detected_ingredients": [
+        "ground beef",
+        "lettuce",
+        "tomato",
+        "red onion",
+        "pickles",
+        "cheese slices",
+        "sesame seed buns",
+        "mayonnaise",
+        "black pepper",
+        "salt"
+      ],
+      "additional_ingredients": [
+        "cooking oil",
+        "butter"
+      ],
+      "prep_time": "15 mins",
+      "cook_time": "10 mins",
+      "total_time": "25 mins",
+      "difficulty": "Easy",
+      "servings": "4 people",
+      "tags": [
+        "Quick",
+        "High Protein",
+        "Snack",
+        "Easy",
+        "Family Friendly"
+      ],
+      "tips": "Form the patties slightly larger than the buns so they shrink while cooking and stay juicy.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Form the Patties",
+          "instruction": "Mix the ground beef with a pinch of salt and pepper, then shape into 4 equal patties slightly larger than the buns."
+        },
+        {
+          "step": 2,
+          "title": "Cook the Patties",
+          "instruction": "Heat a skillet with a little oil over medium‑high heat and cook the patties 4‑5 minutes per side until browned and cooked through."
+        },
+        {
+          "step": 3,
+          "title": "Toast the Buns",
+          "instruction": "Place the sesame seed buns cut side down in the skillet for 1‑2 minutes until lightly toasted."
+        },
+        {
+          "step": 4,
+          "title": "Assemble the Sliders",
+          "instruction": "Layer each bun with lettuce, a slice of tomato, a pickle slice, a cheese slice, the cooked patty, and a dollop of mayonnaise."
+        },
+        {
+          "step": 5,
+          "title": "Serve",
+          "instruction": "Arrange the assembled sliders on a plate and serve immediately while warm."
+        }
+      ],
+      "id": "cc9baa40-492b-4cb0-89cb-ef8a78158726",
+      "created_at": "2026-09-03T16:01:17.007354+00:00",
+      "image_url": null
+    }
+  },
+  {
     "id": "e1b1940b-47ce-4f11-bf9c-c9b589dd313d",
     "created_at": "2026-08-05T06:10:12.678461+00:00",
     "filters": [
