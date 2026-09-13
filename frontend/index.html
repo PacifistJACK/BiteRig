@@ -348,6 +348,27 @@
       </div>
     </section>
 
+    <!-- ── Language ── -->
+    <section class="flex flex-col gap-xs">
+      <div class="flex items-center justify-between">
+        <h2 class="font-headline-md text-headline-md text-on-surface">Language</h2>
+        <span class="font-label-sm text-label-sm text-on-surface-variant italic">Recipe output language</span>
+      </div>
+      <div class="flex gap-sm flex-wrap pt-1">
+
+        <button class="lang-pill whitespace-nowrap bg-secondary-container border-2 border-secondary-container text-on-secondary-container font-label-lg text-label-lg px-5 py-2 rounded-full flex items-center gap-2"
+                data-lang="English" onclick="toggleLanguage('English')">
+          🇬🇧 English
+        </button>
+
+        <button class="lang-pill whitespace-nowrap bg-surface-container-high border-2 border-outline-variant text-on-surface-variant font-label-lg text-label-lg px-5 py-2 rounded-full flex items-center gap-2"
+                data-lang="Hindi" onclick="toggleLanguage('Hindi')">
+          🇮🇳 हिंदी
+        </button>
+
+      </div>
+    </section>
+
     <!-- ── COOK Button ── -->
     <section class="mt-2 pb-sm">
       <button id="btn-cook"

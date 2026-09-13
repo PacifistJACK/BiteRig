@@ -148,6 +148,10 @@ async def cook(
         default=None,
         description="Optional cuisine nationality, e.g. 'Indian'",
     ),
+    language: str = Form(
+        default="English",
+        description="Language for the recipe response, e.g. 'English', 'Hindi'",
+    ),
 ):
     """
     Main endpoint: analyse an ingredient image and return a recipe.
@@ -184,10 +188,14 @@ async def cook(
     # Clean nationality
     clean_nationality = nationality.strip() if nationality and nationality.strip() else None
 
+    # Clean language
+    clean_language = language.strip() if language and language.strip() else "English"
+
     logger.info(
-        "cook() called | filters=%s | nationality=%s | image_size=%d bytes",
+        "cook() called | filters=%s | nationality=%s | language=%s | image_size=%d bytes",
         filters_list,
         clean_nationality,
+        clean_language,
         len(image_bytes),
     )
 
@@ -200,6 +208,7 @@ async def cook(
             image_mime=content_type,
             filters=filters_list,
             nationality=clean_nationality,
+            language=clean_language,
         )
     except ValueError as exc:
         logger.error("LLM error: %s", exc)
@@ -223,6 +232,7 @@ async def cook(
         "created_at": created_at,
         "filters": filters_list,
         "nationality": clean_nationality,
+        "language": clean_language,
         "recipe": recipe,
     }
     try:

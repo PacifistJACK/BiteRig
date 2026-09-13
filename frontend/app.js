@@ -18,6 +18,7 @@
 let selectedFile    = null;
 let selectedFilters = new Set();
 let selectedNationality = null;
+let selectedLanguage = 'English'; // default language
 let cameraStream    = null;
 let cameraFacing    = 'environment'; // 'environment' = back, 'user' = front
 let loadingTimer    = null;
@@ -298,6 +299,30 @@ function toggleNationality(el) {
 }
 
 // ---------------------------------------------------------------------------
+// Language
+// ---------------------------------------------------------------------------
+const LANGUAGES = [
+  { code: 'English', label: 'English', flag: '🇬🇧' },
+  { code: 'Hindi',   label: 'हिंदी',   flag: '🇮🇳' },
+];
+
+function toggleLanguage(code) {
+  selectedLanguage = code;
+
+  // Update pill UI
+  document.querySelectorAll('.lang-pill').forEach(btn => {
+    const isActive = btn.dataset.lang === code;
+    if (isActive) {
+      btn.classList.remove('bg-surface-container-high', 'border-outline-variant', 'text-on-surface-variant');
+      btn.classList.add('bg-secondary-container', 'text-on-secondary-container', 'border-secondary-container');
+    } else {
+      btn.classList.remove('bg-secondary-container', 'text-on-secondary-container', 'border-secondary-container');
+      btn.classList.add('bg-surface-container-high', 'border-outline-variant', 'text-on-surface-variant');
+    }
+  });
+}
+
+// ---------------------------------------------------------------------------
 // Cook Flow
 // ---------------------------------------------------------------------------
 const LOADING_TIPS = [
@@ -361,6 +386,7 @@ async function startCook() {
     const formData = new FormData();
     formData.append('image', selectedFile);
     formData.append('filters', JSON.stringify([...selectedFilters]));
+    formData.append('language', selectedLanguage);
     if (selectedNationality) {
       formData.append('nationality', selectedNationality);
     }
